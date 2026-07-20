@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Market Mirror — Buyer Prototype"
+version = "1.0.0"
+id = "artifacts/market-mirror"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24163
+
+[services.development]
+run = "pnpm --filter @workspace/market-mirror run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/market-mirror", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/market-mirror/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24163"
+BASE_PATH = "/"
