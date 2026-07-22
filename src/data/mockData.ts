@@ -10,6 +10,10 @@ export type Shop = {
   hours: string;
   bannerGradient: string;
   market: string;
+  city: string;
+  phone: string;
+  shopNumber: string;
+  images: string[];
 };
 
 export type Product = {
@@ -65,7 +69,15 @@ export const shops: Shop[] = [
     location: 'Zone A Block 12, Alaba International Market',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #1e3a8a, #3b82f6)',
-    market: 'Alaba International Market'
+    market: 'Alaba International Market',
+    city: 'Lagos',
+    phone: '+234 803 123 4567',
+    shopNumber: 'Zone A, Suite 12',
+    images: [
+      'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=500&q=80',
+    ],
   },
   {
     id: 2,
@@ -78,7 +90,15 @@ export const shops: Shop[] = [
     location: 'Shop 14, Computer Village',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #4c1d95, #8b5cf6)',
-    market: 'Computer Village'
+    market: 'Computer Village',
+    city: 'Lagos',
+    phone: '+234 812 987 6543',
+    shopNumber: 'Shop 14',
+    images: [
+      'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=500&q=80',
+    ],
   },
   {
     id: 3,
@@ -91,7 +111,15 @@ export const shops: Shop[] = [
     location: 'Hall 3 Shop 22, Trade Fair Complex',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #be123c, #f43f5e)',
-    market: 'Trade Fair Complex'
+    market: 'Trade Fair Complex',
+    city: 'Lagos',
+    phone: '+234 802 333 4444',
+    shopNumber: 'Hall 3, Shop 22',
+    images: [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1595341888016-a392ef81b7de?auto=format&fit=crop&w=500&q=80',
+    ],
   },
   {
     id: 4,
@@ -104,7 +132,15 @@ export const shops: Shop[] = [
     location: 'Zone D Block 8, Alaba International Market',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #047857, #10b981)',
-    market: 'Alaba International Market'
+    market: 'Alaba International Market',
+    city: 'Lagos',
+    phone: '+234 807 444 9900',
+    shopNumber: 'Zone D, Suite 7',
+    images: [
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1601752943749-7dd8d89f407a?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=500&q=80',
+    ],
   },
   {
     id: 5,
@@ -117,7 +153,15 @@ export const shops: Shop[] = [
     location: 'Zone E Block 15, Alaba International Market',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #b45309, #f59e0b)',
-    market: 'Alaba International Market'
+    market: 'Alaba International Market',
+    city: 'Lagos',
+    phone: '+234 809 666 3344',
+    shopNumber: 'Zone E, Suite 15',
+    images: [
+      'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=500&q=80',
+    ],
   },
   {
     id: 6,
@@ -130,7 +174,15 @@ export const shops: Shop[] = [
     location: 'Hall 1 Shop 9, Trade Fair Complex',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #be185d, #ec4899)',
-    market: 'Trade Fair Complex'
+    market: 'Trade Fair Complex',
+    city: 'Lagos',
+    phone: '+234 806 222 8811',
+    shopNumber: 'Hall 1, Shop 9',
+    images: [
+      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=500&q=80',
+      'https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=500&q=80',
+    ],
   }
 ];
 

@@ -4,7 +4,7 @@ import { products, shops } from '@/data/mockData';
 import { useCart } from '@/context/CartContext';
 import { formatNaira } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Star, ShieldCheck, MapPin, Store, ChevronRight, Minus, Plus, ShoppingCart, Heart, Phone, MessageCircle, Video, Clock, ImageIcon } from 'lucide-react';
+import { Star, ShieldCheck, MapPin, Store, ChevronRight, Minus, Plus, ShoppingCart, Heart, Phone, MessageCircle, Video, Clock } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
 
 export default function ProductPage() {
@@ -167,8 +167,14 @@ export default function ProductPage() {
             {/* Shop Info */}
             <div className="flex-grow">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border border-border">
-                  <Store className="w-6 h-6 text-muted-foreground" />
+                <div 
+                  className="w-14 h-14 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border border-border overflow-hidden"
+                >
+                  {shop.images[0] ? (
+                    <img src={shop.images[0]} alt={shop.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <Store className="w-6 h-6 text-muted-foreground" />
+                  )}
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-foreground">{shop.name}</h3>
@@ -187,24 +193,24 @@ export default function ProductPage() {
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Phone className="w-4 h-4 text-primary shrink-0" />
-                  <span>+234 801 234 5678</span>
+                  <a href={`tel:${shop.phone.replace(/\s/g, '')}`} className="hover:text-primary transition-colors">{shop.phone}</a>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Clock className="w-4 h-4 text-primary shrink-0" />
                   <span>{shop.hours}</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <ImageIcon className="w-4 h-4 text-primary shrink-0" />
-                  <span>Shop {Math.floor(Math.random() * 50) + 1}, Block {String.fromCharCode(65 + Math.floor(Math.random() * 6))}</span>
+                  <Store className="w-4 h-4 text-primary shrink-0" />
+                  <span>{shop.shopNumber}</span>
                 </div>
               </div>
             </div>
             
-            {/* Shop Images (placeholder) */}
+            {/* Shop Images */}
             <div className="flex gap-2 shrink-0">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="w-20 h-20 md:w-24 md:h-24 rounded-lg bg-muted border border-border flex items-center justify-center">
-                  <ImageIcon className="w-6 h-6 text-muted-foreground/50" />
+              {shop.images.slice(0, 3).map((img, i) => (
+                <div key={i} className="w-20 h-20 md:w-24 md:h-24 rounded-lg bg-muted border border-border overflow-hidden">
+                  <img src={img} alt={`${shop.name} photo ${i + 1}`} className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
@@ -222,10 +228,10 @@ export default function ProductPage() {
                 <MessageCircle className="w-4 h-4" /> Chat with Vendor
               </Button>
             </Link>
-            <Button variant="outline" size="sm" className="gap-2" onClick={() => window.open('tel:+2348012345678')}>
+            <Button variant="outline" size="sm" className="gap-2" onClick={() => window.open(`tel:${shop.phone.replace(/\s/g, '')}`)}>
               <Phone className="w-4 h-4" /> Call
             </Button>
-            <Button variant="outline" size="sm" className="gap-2" onClick={() => window.open('tel:+2348012345678')}>
+            <Button variant="outline" size="sm" className="gap-2" onClick={() => window.open(`tel:${shop.phone.replace(/\s/g, '')}`)}>
               <Video className="w-4 h-4" /> Video Call
             </Button>
           </div>
@@ -244,6 +250,15 @@ export default function ProductPage() {
         )}
         
       </div>
+
+      {/* Floating Chat Button */}
+      <Link 
+        href={`/chat/${shop.id}`} 
+        onClick={() => sessionStorage.setItem('chatReferrer', 'shop')}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-lg shadow-primary/30 flex items-center justify-center hover:bg-primary/90 transition-all hover:scale-105"
+      >
+        <MessageCircle className="w-6 h-6" />
+      </Link>
     </div>
   );
 }

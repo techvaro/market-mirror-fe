@@ -1,9 +1,10 @@
 import { useParams, Link } from 'wouter';
 import { shops, products } from '@/data/mockData';
 import { ProductCard } from '@/components/ProductCard';
-import { Star, MapPin, Clock, ShieldCheck, Mail, Phone, MessageCircle, Video, ImageIcon, ChevronRight, ExternalLink } from 'lucide-react';
+import { Star, MapPin, Clock, ShieldCheck, Mail, Phone, MessageCircle, Video, ChevronRight, ChevronLeft, ExternalLink } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useReviews } from '@/context/ReviewsContext';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -131,23 +132,23 @@ export default function ShopPage() {
                     <MessageCircle className="w-4 h-4" /> Chat
                   </Button>
                 </Link>
-                <Button size="sm" variant="outline" className="gap-2" onClick={() => window.open('tel:+2348012345678')}>
-                  <Phone className="w-4 h-4" /> Call
-                </Button>
-                <Button size="sm" variant="outline" className="gap-2" onClick={() => window.open('tel:+2348012345678')}>
-                  <Video className="w-4 h-4" /> Video
+                <Button size="sm" variant="outline" className="gap-2 text-green-600 border-green-600/30 hover:bg-green-50" onClick={() => window.open(`https://wa.me/${shop.phone.replace(/[\s+]/g, '')}`, '_blank')}>
+                  <FaWhatsapp className="w-4 h-4" /> WhatsApp
                 </Button>
                 <Button size="sm" variant="outline" className="gap-2" onClick={() => setContactModalOpen(true)}>
                   <Mail className="w-4 h-4" /> Email
+                </Button>
+                <Button size="sm" variant="outline" className="gap-2" onClick={() => window.open(`tel:${shop.phone.replace(/\s/g, '')}`)}>
+                  <Phone className="w-4 h-4" /> Call
                 </Button>
               </div>
             </div>
 
             {/* Shop Images Row */}
             <div className="flex gap-2 mt-4 pt-4 border-t border-border overflow-x-auto">
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className="w-20 h-16 md:w-28 md:h-20 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0">
-                  <ImageIcon className="w-5 h-5 text-muted-foreground/50" />
+              {shop.images.map((img, i) => (
+                <div key={i} className="w-20 h-16 md:w-28 md:h-20 rounded-lg bg-muted border border-border overflow-hidden shrink-0">
+                  <img src={img} alt={`${shop.name} photo ${i + 1}`} className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
@@ -190,7 +191,7 @@ export default function ShopPage() {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4"
           >
             {shopProducts.map(product => (
               <ProductCard key={product.id} product={product} />
@@ -224,7 +225,7 @@ export default function ShopPage() {
                     </div>
                     <div>
                       <p className="text-muted-foreground text-xs">Phone</p>
-                      <p className="font-medium">+234 801 234 5678</p>
+                      <a href={`tel:${shop.phone.replace(/\s/g, '')}`} className="font-medium hover:text-primary transition-colors">{shop.phone}</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -250,7 +251,7 @@ export default function ShopPage() {
                   <Link href={`/chat/${shop.id}`} onClick={() => sessionStorage.setItem('chatReferrer', 'shop')}>
                     <Button size="sm" className="gap-2"><MessageCircle className="w-4 h-4" /> Chat with Vendor</Button>
                   </Link>
-                  <Button size="sm" variant="outline" className="gap-2" onClick={() => window.open('tel:+2348012345678')}>
+                  <Button size="sm" variant="outline" className="gap-2" onClick={() => window.open(`tel:${shop.phone.replace(/\s/g, '')}`)}>
                     <Phone className="w-4 h-4" /> Call Now
                   </Button>
                 </div>
@@ -285,10 +286,10 @@ export default function ShopPage() {
                   <Link href={`/chat/${shop.id}`} onClick={() => sessionStorage.setItem('chatReferrer', 'shop')}>
                     <Button size="sm" className="w-full justify-start gap-2"><MessageCircle className="w-4 h-4" /> Start Chat</Button>
                   </Link>
-                  <Button size="sm" variant="outline" className="w-full justify-start gap-2" onClick={() => window.open('tel:+2348012345678')}>
+                  <Button size="sm" variant="outline" className="w-full justify-start gap-2" onClick={() => window.open(`tel:${shop.phone.replace(/\s/g, '')}`)}>
                     <Phone className="w-4 h-4" /> Call Vendor
                   </Button>
-                  <Button size="sm" variant="outline" className="w-full justify-start gap-2" onClick={() => window.open('tel:+2348012345678')}>
+                  <Button size="sm" variant="outline" className="w-full justify-start gap-2" onClick={() => window.open(`tel:${shop.phone.replace(/\s/g, '')}`)}>
                     <Video className="w-4 h-4" /> Video Call
                   </Button>
                 </div>

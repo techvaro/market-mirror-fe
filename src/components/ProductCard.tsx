@@ -1,62 +1,104 @@
 import { Link } from 'wouter';
-import { Star, ShoppingBag } from 'lucide-react';
-import { Product, shops } from '@/data/mockData';
+import { Star, ShoppingCart, Flame } from 'lucide-react';
 import { formatNaira } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { useCart } from '@/context/CartContext';
+import { Button } from '@/components/ui/button';
+import type { Product } from '@/data/mockData';
 
 interface ProductCardProps {
   product: Product;
 }
 
-export const ProductCard = ({ product }: ProductCardProps) => {
-  const shop = shops.find(s => s.id === product.shopId);
+export function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
+
+  const handleQuickAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product, product.variants[0] || 'Default', 1);
+  };
+
+  const mockSoldCount = `${(product.id * 1.2).toFixed(1)}K+ sold`;
+  const originalPrice = Math.round(product.price * 1.4);
 
   return (
     <Link href={`/product/${product.id}`}>
-      <motion.div 
-        whileHover={{ y: -4 }}
-        className="group flex flex-col bg-card rounded-xl border border-border overflow-hidden h-full cursor-pointer hover:shadow-lg transition-shadow"
-      >
-        <div 
-          className="aspect-square w-full relative"
-          style={{ backgroundColor: product.color }}
-        >
-          {!product.stock && (
-            <div className="absolute top-2 right-2 bg-background/90 text-destructive text-xs font-bold px-2 py-1 rounded">
-              Out of Stock
-            </div>
-          )}
-        </div>
-        
-        <div className="p-4 flex flex-col flex-grow">
-          <div className="text-xs text-muted-foreground mb-1">{product.category}</div>
-          <h3 className="font-medium text-foreground line-clamp-2 leading-tight mb-2 group-hover:text-primary transition-colors">
-            {product.name}
-          </h3>
-          
-          <div className="mt-auto">
-            <div className="flex items-center gap-1 mb-2">
-              <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-              <span className="text-sm font-medium">{product.rating}</span>
-            </div>
-            
-            <div className="flex items-center justify-between mt-2">
-              <span className="font-bold text-lg text-foreground">
-                {formatNaira(product.price)}
+      <div className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-border bg-card shadow-xs transition-all hover:shadow-md cursor-pointer h-full">
+        <div>
+          {/* Product Image Area */}
+          <div 
+            className="relative aspect-square w-full overflow-hidden bg-muted"
+            style={{ backgroundColor: product.color }}
+          >
+            {!product.stock ? (
+              <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px] flex items-center justify-center">
+                <span className="text-[10px] font-bold text-destructive border-2 border-destructive px-2 py-0.5 rounded uppercase">
+                  Out of Stock
+                </span>
+              </div>
+            ) : (
+              <span className="absolute top-1.5 left-1.5 bg-red-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-sm uppercase">
+                ONLY FEW LEFT
               </span>
-              <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                <ShoppingBag className="w-4 h-4" />
-              </div>
-            </div>
-            
-            {shop && (
-              <div className="mt-3 pt-3 border-t border-border text-xs text-muted-foreground flex items-center gap-1 truncate">
-                <span className="truncate">Sold by {shop.name}</span>
-              </div>
             )}
           </div>
+
+          {/* Product Details */}
+          <div className="p-2 flex flex-col gap-0.5">
+            {/* Title (Max 2 lines) */}
+            <h3 className="text-xs font-medium text-foreground leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+              {product.name}
+            </h3>
+
+            {/* Ratings & Sold Count Row */}
+            <div className="flex items-center gap-1 text-[10px] text-muted-foreground mt-0.5">
+              <div className="flex items-center text-yellow-500">
+                <Star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
+                <span className="font-bold ml-0.5 text-foreground">{product.rating}</span>
+              </div>
+              <span className="text-border">|</span>
+              <div className="flex items-center text-orange-600 font-medium truncate">
+                <Flame className="w-2.5 h-2.5 fill-orange-500 text-orange-500 mr-0.5 shrink-0" />
+                <span>{mockSoldCount}</span>
+              </div>
+            </div>
+
+            {/* Promo Tag */}
+            <div className="inline-block mt-0.5">
+              <span className="bg-orange-500/10 text-orange-600 text-[9px] font-bold px-1.5 py-0.5 rounded">
+                BEST-SELLING ITEM
+              </span>
+            </div>
+          </div>
         </div>
-      </motion.div>
+
+        {/* Price & Action Footer */}
+        <div className="p-2 pt-0 flex items-end justify-between mt-auto">
+          <div className="flex flex-col">
+            <span className="text-[9px] text-orange-600 font-bold leading-none mb-0.5">
+              Last day
+            </span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-sm font-extrabold text-orange-600 leading-none">
+                {formatNaira(product.price)}
+              </span>
+              <span className="text-[9px] text-muted-foreground line-through">
+                {formatNaira(originalPrice)}
+              </span>
+            </div>
+          </div>
+
+          {/* Circular Quick Add Button */}
+          <Button
+            size="icon"
+            variant="outline"
+            onClick={handleQuickAdd}
+            className="w-7 h-7 rounded-full border-border bg-background hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all shrink-0"
+          >
+            <ShoppingCart className="w-3 h-3" />
+          </Button>
+        </div>
+      </div>
     </Link>
   );
-};
+}

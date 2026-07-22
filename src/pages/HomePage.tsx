@@ -11,6 +11,7 @@ import {
   Search, Star, ShieldCheck, Zap, Crosshair, Map as MapIcon, Lock, Truck, Clock
 } from 'lucide-react';
 import { formatNaira } from '@/lib/utils';
+import { ProductCard } from '@/components/ProductCard';
 import type { Product, Shop } from '@/data/mockData';
 
 // Assets
@@ -157,6 +158,16 @@ export default function HomePage() {
 
         <div className="container mx-auto px-3 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2"
+            >
+              <span className="text-[#F97316] text-base md:text-xl font-display font-extrabold tracking-widest uppercase">
+                The mall of a Million Shops
+              </span>
+            </motion.div>
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -255,8 +266,8 @@ export default function HomePage() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {products.slice(0, 6).map((product, idx) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
+            {products.slice(0, 8).map((product, idx) => (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -264,7 +275,7 @@ export default function HomePage() {
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
                 key={product.id}
               >
-                <TrendingProductRow product={product} />
+                <ProductCard product={product} />
               </motion.div>
             ))}
           </div>
@@ -381,114 +392,189 @@ export default function HomePage() {
       </section>
 
       {/* App Download */}
-      <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+      <section className="py-14 md:py-24 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:32px_32px]"></div>
         <div className="container mx-auto px-3 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-20 max-w-6xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-20 max-w-6xl mx-auto">
             
-            <div className="flex-1 space-y-8 text-center lg:text-left order-2 lg:order-1">
+            <div className="flex-1 space-y-6 md:space-y-8 text-center lg:text-left order-2 lg:order-1">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold leading-[1.1] mb-6 text-white tracking-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold leading-[1.1] mb-4 md:mb-6 text-white tracking-tight">
                   Alaba Market, <br/> now in your pocket.
                 </h2>
-                <p className="text-lg md:text-xl text-primary-foreground/90 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 font-medium">
+                <p className="text-base md:text-xl text-primary-foreground/90 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-6 md:mb-10 font-medium">
                   Get real-time price updates, chat directly with vendors, and track your local deliveries on the go with our mobile app.
                 </p>
                 
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                  <button onClick={handleAppStoreClick} className="flex items-center gap-4 bg-background text-foreground px-6 py-4 rounded-2xl hover:scale-105 transition-transform w-full sm:w-auto justify-center shadow-2xl">
-                    <Apple className="w-8 h-8" />
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4">
+                  <button onClick={handleAppStoreClick} className="flex items-center gap-3 md:gap-4 bg-background text-foreground px-5 md:px-6 py-3 md:py-4 rounded-2xl hover:scale-105 transition-transform w-full sm:w-auto justify-center shadow-2xl">
+                    <Apple className="w-7 h-7 md:w-8 md:h-8" />
                     <div className="text-left">
-                      <div className="text-[10px] uppercase tracking-widest font-bold opacity-60">Download on the</div>
-                      <div className="text-xl font-bold font-display leading-none mt-1">App Store</div>
+                      <div className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold opacity-60">Download on the</div>
+                      <div className="text-lg md:text-xl font-bold font-display leading-none mt-1">App Store</div>
                     </div>
                   </button>
-                  <button onClick={handleAppStoreClick} className="flex items-center gap-4 bg-secondary text-white px-6 py-4 rounded-2xl hover:scale-105 transition-transform w-full sm:w-auto justify-center shadow-2xl">
-                    <Play className="w-8 h-8" />
+                  <button onClick={handleAppStoreClick} className="flex items-center gap-3 md:gap-4 bg-secondary text-white px-5 md:px-6 py-3 md:py-4 rounded-2xl hover:scale-105 transition-transform w-full sm:w-auto justify-center shadow-2xl">
+                    <Play className="w-7 h-7 md:w-8 md:h-8" />
                     <div className="text-left">
-                      <div className="text-[10px] uppercase tracking-widest font-bold opacity-80">Get it on</div>
-                      <div className="text-xl font-bold font-display leading-none mt-1">Google Play</div>
+                      <div className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold opacity-80">Get it on</div>
+                      <div className="text-lg md:text-xl font-bold font-display leading-none mt-1">Google Play</div>
                     </div>
                   </button>
                 </div>
               </motion.div>
             </div>
             
-            <div className="flex-1 flex justify-center w-full max-w-md mx-auto order-1 lg:order-2 h-[500px] md:h-[600px] relative">
+            {/* Phone Mockups */}
+            <div className="flex-1 flex justify-center items-center w-full order-1 lg:order-2">
               <motion.div 
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative w-full h-full flex justify-center"
+                className="relative w-full max-w-[340px] sm:max-w-[420px] md:max-w-[500px] flex justify-center"
               >
-                {/* Decorative blob */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-white/20 rounded-full blur-3xl"></div>
-                
-                {/* Back Phone */}
-                <div className="absolute left-0 md:left-4 top-16 w-[240px] md:w-[260px] h-[500px] md:h-[540px] bg-secondary rounded-[2.5rem] border-[6px] md:border-8 border-secondary-foreground shadow-2xl overflow-hidden flex flex-col rotate-[-8deg] opacity-80 z-0">
-                  <div className="absolute top-0 inset-x-0 h-5 md:h-6 bg-secondary-foreground rounded-b-2xl w-28 md:w-32 mx-auto z-20"></div>
-                  <div className="flex-1 bg-background p-4 pt-12 opacity-50">
-                    <div className="space-y-4">
-                      <div className="h-32 bg-muted rounded-2xl"></div>
-                      <div className="h-20 bg-muted rounded-xl"></div>
-                      <div className="h-20 bg-muted rounded-xl"></div>
+                {/* Decorative glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 md:w-96 md:h-96 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                {/* Back Phone - only visible on sm+ */}
+                <div className="hidden sm:block absolute -left-2 md:left-0 top-8 md:top-12 w-[180px] md:w-[230px] h-[360px] md:h-[460px] bg-secondary rounded-[2rem] md:rounded-[2.5rem] border-[5px] md:border-[6px] border-secondary-foreground shadow-2xl overflow-hidden rotate-[-6deg] opacity-70 z-0">
+                  <div className="absolute top-0 inset-x-0 h-5 md:h-6 bg-secondary-foreground rounded-b-xl w-20 md:w-28 mx-auto z-20"></div>
+                  <div className="flex-1 bg-background/50 p-3 md:p-4 pt-10 md:pt-12 space-y-3 md:space-y-4">
+                    <div className="h-20 md:h-28 bg-muted/60 rounded-xl md:rounded-2xl"></div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="h-14 md:h-20 bg-muted/60 rounded-lg"></div>
+                      <div className="h-14 md:h-20 bg-muted/60 rounded-lg"></div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-10 md:h-14 bg-muted/60 rounded-lg"></div>
+                      <div className="h-10 md:h-14 bg-muted/60 rounded-lg"></div>
                     </div>
                   </div>
                 </div>
 
                 {/* Front Phone */}
-                <div className="absolute right-0 md:right-4 top-0 w-[260px] md:w-[280px] h-[540px] md:h-[580px] bg-card rounded-[3rem] border-[6px] md:border-8 border-foreground shadow-2xl overflow-hidden flex flex-col rotate-[3deg] hover:rotate-0 transition-transform duration-500 z-10">
-                  <div className="absolute top-0 inset-x-0 h-6 md:h-7 bg-foreground rounded-b-3xl w-32 md:w-40 mx-auto z-20"></div>
-                  
-                  <div className="flex-1 bg-muted/30 p-5 pt-12 flex flex-col gap-4 relative">
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                        <ShoppingBag className="w-5 h-5 text-primary" />
+                <div className="relative w-[170px] sm:w-[200px] md:w-[250px] h-[340px] sm:h-[400px] md:h-[500px] bg-card rounded-[2rem] md:rounded-[2.5rem] border-[5px] md:border-[6px] border-foreground shadow-2xl overflow-hidden z-10">
+                  {/* Notch */}
+                  <div className="absolute top-0 inset-x-0 h-6 md:h-7 bg-foreground rounded-b-2xl w-24 md:w-36 mx-auto z-20"></div>
+
+                  {/* Screen Content */}
+                  <div className="flex-1 h-full bg-muted/20 p-3 sm:p-4 md:p-5 pt-10 md:pt-12 flex flex-col gap-2.5 md:gap-3.5 relative overflow-hidden">
+                    {/* App Header */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-primary flex items-center justify-center">
+                          <ShoppingBag className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-white" />
+                        </div>
+                        <span className="text-[8px] md:text-[10px] font-bold text-foreground">Market Mirror</span>
                       </div>
-                      <div className="flex gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-                        <div className="w-2 h-2 rounded-full bg-border"></div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-green-400"></div>
+                        <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-muted-foreground/30"></div>
                       </div>
                     </div>
                     
-                    <div className="h-10 bg-background rounded-full w-full border border-border shadow-sm"></div>
-                    
-                    <div className="h-28 bg-primary rounded-2xl p-4 text-primary-foreground flex flex-col justify-end relative overflow-hidden shadow-md">
-                      <div className="absolute -right-4 -top-4 w-20 h-20 bg-white/20 rounded-full blur-xl"></div>
-                      <div className="w-24 h-3 bg-white/30 rounded-full mb-2.5"></div>
-                      <div className="w-32 h-4 bg-white/80 rounded-full"></div>
+                    {/* Search Bar */}
+                    <div className="h-7 md:h-9 bg-background rounded-full w-full border border-border shadow-sm flex items-center px-2.5 md:px-3 gap-1.5">
+                      <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-muted-foreground/20"></div>
+                      <div className="h-1.5 md:h-2 bg-muted-foreground/15 rounded-full w-1/2"></div>
                     </div>
                     
-                    <div className="grid grid-cols-4 gap-2 mt-1">
-                      {[1,2,3,4].map(i => <div key={i} className="aspect-square bg-background border border-border rounded-xl shadow-sm"></div>)}
+                    {/* Hero Banner */}
+                    <div className="h-16 sm:h-20 md:h-28 bg-gradient-to-br from-primary to-primary/80 rounded-xl md:rounded-2xl p-2.5 md:p-3.5 text-white flex flex-col justify-end relative overflow-hidden shadow-md">
+                      <div className="absolute -right-3 -top-3 w-14 md:w-20 h-14 md:h-20 bg-white/15 rounded-full blur-lg"></div>
+                      <div className="absolute right-4 bottom-3 w-8 h-8 md:w-12 md:h-12 bg-white/10 rounded-full blur-md"></div>
+                      <div className="relative z-10">
+                        <div className="text-[7px] md:text-[9px] font-bold uppercase tracking-wider text-white/70 mb-0.5 md:mb-1">Flash Sale</div>
+                        <div className="w-16 md:w-24 h-1.5 md:h-2 bg-white/30 rounded-full mb-1 md:mb-1.5"></div>
+                        <div className="w-20 md:w-28 h-2 md:h-2.5 bg-white/80 rounded-full"></div>
+                      </div>
                     </div>
                     
-                    <div className="space-y-3 mt-2">
+                    {/* Category Grid */}
+                    <div className="grid grid-cols-4 gap-1 md:gap-1.5">
+                      {[1,2,3,4].map(i => (
+                        <div key={i} className="flex flex-col items-center gap-0.5 md:gap-1">
+                          <div className="w-7 h-7 md:w-9 md:h-9 bg-primary/10 rounded-lg md:rounded-xl flex items-center justify-center">
+                            <div className="w-3 h-3 md:w-4 md:h-4 bg-primary/30 rounded"></div>
+                          </div>
+                          <div className="w-6 md:w-8 h-1 md:h-1.5 bg-muted-foreground/15 rounded-full"></div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Product Cards */}
+                    <div className="space-y-1.5 md:space-y-2">
                       {[1,2].map(i => (
-                        <div key={i} className="flex gap-3 bg-background p-2 rounded-xl border border-border shadow-sm">
-                          <div className="w-14 h-14 bg-muted rounded-lg shrink-0"></div>
-                          <div className="flex-1 py-1 space-y-2.5">
-                            <div className="h-2.5 bg-muted rounded-full w-3/4"></div>
-                            <div className="h-2.5 bg-muted rounded-full w-1/2"></div>
+                        <div key={i} className="flex gap-2 md:gap-2.5 bg-background p-1.5 md:p-2 rounded-lg md:rounded-xl border border-border shadow-sm">
+                          <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-lg shrink-0 flex items-center justify-center">
+                            <div className="w-5 h-5 md:w-7 md:h-7 bg-primary/25 rounded"></div>
+                          </div>
+                          <div className="flex-1 py-0.5 md:py-1 flex flex-col justify-between">
+                            <div className="space-y-1 md:space-y-1.5">
+                              <div className="h-1.5 md:h-2 bg-muted rounded-full w-full"></div>
+                              <div className="h-1.5 md:h-2 bg-muted rounded-full w-3/5"></div>
+                            </div>
+                            <div className="flex items-center justify-between mt-0.5">
+                              <div className="h-2 md:h-2.5 bg-primary rounded-full w-8 md:w-12"></div>
+                              <div className="w-5 h-5 md:w-6 md:h-6 bg-primary rounded-full"></div>
+                            </div>
                           </div>
                         </div>
                       ))}
                     </div>
 
-                    <div className="absolute bottom-0 inset-x-0 h-16 bg-background border-t border-border flex items-center justify-around px-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
-                      <div className="w-6 h-6 rounded bg-primary/40"></div>
-                      <div className="w-6 h-6 rounded bg-border"></div>
-                      <div className="w-6 h-6 rounded bg-border"></div>
-                      <div className="w-6 h-6 rounded bg-border"></div>
+                    {/* Bottom Nav */}
+                    <div className="absolute bottom-0 inset-x-0 h-11 md:h-14 bg-background border-t border-border flex items-center justify-around px-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-4 h-4 md:w-5 md:h-5 rounded bg-primary/60"></div>
+                        <div className="w-4 md:w-5 h-0.5 bg-primary rounded-full"></div>
+                      </div>
+                      <div className="w-4 h-4 md:w-5 md:h-5 rounded bg-muted-foreground/20"></div>
+                      <div className="w-4 h-4 md:w-5 md:h-5 rounded bg-muted-foreground/20"></div>
+                      <div className="w-4 h-4 md:w-5 md:h-5 rounded bg-muted-foreground/20"></div>
                     </div>
                   </div>
                 </div>
+
+                {/* Floating notification card */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                  className="hidden md:flex absolute -left-6 lg:-left-10 top-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-3 items-center gap-2.5 z-20 w-44 lg:w-52"
+                >
+                  <div className="w-9 h-9 bg-green-100 rounded-full flex items-center justify-center shrink-0">
+                    <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-gray-900 leading-tight">Order Delivered!</p>
+                    <p className="text-[9px] text-gray-400 mt-0.5">Your package arrived</p>
+                  </div>
+                </motion.div>
+
+                {/* Floating price card */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 1 }}
+                  className="hidden md:flex absolute -right-4 lg:-right-8 bottom-16 md:bottom-24 bg-white rounded-xl shadow-2xl p-3 items-center gap-2.5 z-20 w-40 lg:w-48"
+                >
+                  <div className="w-9 h-9 bg-orange-100 rounded-lg flex items-center justify-center shrink-0">
+                    <div className="w-4 h-4 bg-orange-400 rounded"></div>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-gray-900">Best Price</p>
+                    <p className="text-[9px] text-orange-500 font-bold mt-0.5">₦45,000</p>
+                  </div>
+                </motion.div>
               </motion.div>
             </div>
           </div>

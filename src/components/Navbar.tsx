@@ -39,9 +39,18 @@ export const Navbar = () => {
   const [selectedMarket, setSelectedMarket] = useState('Alaba International Market');
 
   const [reportModalOpen, setReportModalOpen] = useState(false);
+  const [reportCity, setReportCity] = useState('');
+  const [reportMarket, setReportMarket] = useState('');
   const [reportShopId, setReportShopId] = useState('');
   const [reportReason, setReportReason] = useState('');
   const [reportDescription, setReportDescription] = useState('');
+
+  const reportAvailableMarkets = reportCity ? (cityMarkets[reportCity] || []) : [];
+  const filteredShops = reportMarket 
+    ? shops.filter(s => s.market === reportMarket && s.city === reportCity)
+    : reportCity 
+      ? shops.filter(s => s.city === reportCity)
+      : shops;
 
   const availableMarkets = cityMarkets[selectedCity] || [];
 
@@ -86,6 +95,8 @@ export const Navbar = () => {
     });
     
     setReportModalOpen(false);
+    setReportCity('');
+    setReportMarket('');
     setReportShopId('');
     setReportReason('');
     setReportDescription('');
@@ -101,34 +112,34 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 w-full">
       {/* City / Market Selector Bar */}
-      <div className="bg-secondary text-secondary-foreground border-b border-secondary/80">
+      <div className="bg-white text-foreground border-b border-border">
         <div className="container mx-auto px-3 h-9 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-xs font-medium">
             <MapPin className="w-3.5 h-3.5 text-primary" />
-            <span className="hidden sm:inline text-secondary-foreground/70">Location:</span>
+            <span className="hidden sm:inline text-muted-foreground">Location:</span>
             <select
               value={selectedCity}
               onChange={e => handleCityChange(e.target.value)}
-              className="bg-secondary-foreground/10 border-none text-secondary-foreground text-xs font-bold rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+              className="bg-muted border-none text-foreground text-xs font-bold rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
               {cities.map(city => (
                 <option key={city} value={city} className="bg-background text-foreground">{city}</option>
               ))}
             </select>
-            <span className="text-secondary-foreground/40">|</span>
+            <span className="text-muted-foreground/40">|</span>
             <select
               value={selectedMarket}
               onChange={e => setSelectedMarket(e.target.value)}
-              className="bg-secondary-foreground/10 border-none text-secondary-foreground text-xs font-bold rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer max-w-[200px] truncate"
+              className="bg-muted border-none text-foreground text-xs font-bold rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer max-w-[200px] truncate"
             >
               {availableMarkets.map(m => (
                 <option key={m} value={m} className="bg-background text-foreground">{m}</option>
               ))}
             </select>
           </div>
-          <div className="hidden md:flex items-center gap-4 text-xs text-secondary-foreground/70">
+          <div className="hidden md:flex items-center gap-4 text-xs text-muted-foreground">
             <span>Sell on Market Mirror</span>
-            <span className="text-secondary-foreground/30">|</span>
+            <span className="text-border">|</span>
             <span>Help Center</span>
           </div>
         </div>
@@ -140,8 +151,7 @@ export const Navbar = () => {
           {/* Logo + Nav Links */}
           <div className="flex items-center gap-2 md:gap-6 shrink-0">
             <Link href="/" className="flex items-center gap-2 shrink-0">
-              <Logo size="md" className="hidden sm:flex" />
-              <Logo variant="icon" size="sm" className="sm:hidden" />
+              <Logo size="sm" />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-1 text-sm font-medium">
@@ -185,65 +195,69 @@ export const Navbar = () => {
               )}
             </Link>
 
-            {/* Notifications */}
-            <Link href="/notifications" className="relative p-2 text-foreground hover:bg-muted rounded-full transition-colors shrink-0">
-              <Bell className="w-5 h-5" />
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-destructive text-[10px] font-bold text-destructive-foreground rounded-full flex items-center justify-center">
-                3
-              </span>
-            </Link>
+            {/* Notifications - only when logged in */}
+            {user && (
+              <Link href="/notifications" className="relative p-2 text-foreground hover:bg-muted rounded-full transition-colors shrink-0">
+                <Bell className="w-5 h-5" />
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-destructive text-[10px] font-bold text-destructive-foreground rounded-full flex items-center justify-center">
+                  3
+                </span>
+              </Link>
+            )}
 
-            {/* Chat Dropdown */}
-            <div className="hidden sm:block">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="relative p-2 text-foreground hover:bg-muted rounded-full transition-colors shrink-0">
-                    <MessageCircle className="w-5 h-5" />
-                    {totalUnreadChats > 0 && (
-                      <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary text-[10px] font-bold text-primary-foreground rounded-full flex items-center justify-center">
-                        {totalUnreadChats}
-                      </span>
-                    )}
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-80 p-0" align="end">
-                  <div className="px-4 py-3 border-b border-border">
-                    <h3 className="font-bold text-sm">Messages</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">{totalUnreadChats} unread</p>
-                  </div>
-                  <div className="max-h-80 overflow-y-auto">
-                    {mockChats.map(chat => (
-                      <Link key={chat.shopId} href={`/chat/${chat.shopId}`} onClick={() => { sessionStorage.setItem('chatReferrer', 'chat'); document.dispatchEvent(new Event('mousedown')); }}>
-                        <DropdownMenuItem className="px-4 py-3 cursor-pointer gap-3">
-                          <Avatar className="h-10 w-10 shrink-0">
-                            <AvatarFallback className="bg-primary/10 text-primary text-xs font-bold">
-                              {chat.shopName.charAt(0)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="flex-grow min-w-0">
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="font-bold text-sm truncate">{chat.shopName}</span>
-                              <span className="text-[10px] text-muted-foreground shrink-0">{chat.time}</span>
+            {/* Chat Dropdown - only when logged in */}
+            {user && (
+              <div className="hidden sm:block">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="relative p-2 text-foreground hover:bg-muted rounded-full transition-colors shrink-0">
+                      <MessageCircle className="w-5 h-5" />
+                      {totalUnreadChats > 0 && (
+                        <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary text-[10px] font-bold text-primary-foreground rounded-full flex items-center justify-center">
+                          {totalUnreadChats}
+                        </span>
+                      )}
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-80 p-0" align="end">
+                    <div className="px-4 py-3 border-b border-border">
+                      <h3 className="font-bold text-sm">Messages</h3>
+                      <p className="text-xs text-muted-foreground mt-0.5">{totalUnreadChats} unread</p>
+                    </div>
+                    <div className="max-h-80 overflow-y-auto">
+                      {mockChats.map(chat => (
+                        <Link key={chat.shopId} href={`/chat/${chat.shopId}`} onClick={() => { sessionStorage.setItem('chatReferrer', 'chat'); document.dispatchEvent(new Event('mousedown')); }}>
+                          <DropdownMenuItem className="px-4 py-3 cursor-pointer gap-3">
+                            <Avatar className="h-10 w-10 shrink-0">
+                              <AvatarFallback className="bg-primary/10 text-primary text-xs font-bold">
+                                {chat.shopName.charAt(0)}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="flex-grow min-w-0">
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="font-bold text-sm truncate">{chat.shopName}</span>
+                                <span className="text-[10px] text-muted-foreground shrink-0">{chat.time}</span>
+                              </div>
+                              <p className="text-xs text-muted-foreground truncate mt-0.5">{chat.lastMessage}</p>
                             </div>
-                            <p className="text-xs text-muted-foreground truncate mt-0.5">{chat.lastMessage}</p>
-                          </div>
-                          {chat.unread > 0 && (
-                            <span className="w-5 h-5 bg-primary text-[10px] font-bold text-primary-foreground rounded-full flex items-center justify-center shrink-0">
-                              {chat.unread}
-                            </span>
-                          )}
-                        </DropdownMenuItem>
+                            {chat.unread > 0 && (
+                              <span className="w-5 h-5 bg-primary text-[10px] font-bold text-primary-foreground rounded-full flex items-center justify-center shrink-0">
+                                {chat.unread}
+                              </span>
+                            )}
+                          </DropdownMenuItem>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="border-t border-border p-2">
+                      <Link href="/chat" onClick={() => document.dispatchEvent(new Event('mousedown'))}>
+                        <Button variant="ghost" className="w-full text-xs" size="sm">View All Messages</Button>
                       </Link>
-                    ))}
-                  </div>
-                  <div className="border-t border-border p-2">
-                    <Link href="/chat" onClick={() => document.dispatchEvent(new Event('mousedown'))}>
-                      <Button variant="ghost" className="w-full text-xs" size="sm">View All Messages</Button>
-                    </Link>
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+                    </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )}
 
             {/* User / Sign In */}
             {user ? (
@@ -334,16 +348,20 @@ export const Navbar = () => {
             <Link href="/products" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3 py-3 px-3 text-foreground rounded-lg hover:bg-muted">
               <Store className="w-5 h-5 text-muted-foreground" /> Shop All
             </Link>
-            <Link href="/chat" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3 py-3 px-3 text-foreground rounded-lg hover:bg-muted">
-              <MessageCircle className="w-5 h-5 text-muted-foreground" /> Messages
-              {totalUnreadChats > 0 && (
-                <span className="ml-auto w-5 h-5 bg-primary text-[10px] font-bold text-primary-foreground rounded-full flex items-center justify-center">{totalUnreadChats}</span>
-              )}
-            </Link>
-            <Link href="/notifications" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3 py-3 px-3 text-foreground rounded-lg hover:bg-muted">
-              <Bell className="w-5 h-5 text-muted-foreground" /> Notifications
-              <span className="ml-auto w-5 h-5 bg-destructive text-[10px] font-bold text-destructive-foreground rounded-full flex items-center justify-center">3</span>
-            </Link>
+            {user && (
+              <>
+                <Link href="/chat" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3 py-3 px-3 text-foreground rounded-lg hover:bg-muted">
+                  <MessageCircle className="w-5 h-5 text-muted-foreground" /> Messages
+                  {totalUnreadChats > 0 && (
+                    <span className="ml-auto w-5 h-5 bg-primary text-[10px] font-bold text-primary-foreground rounded-full flex items-center justify-center">{totalUnreadChats}</span>
+                  )}
+                </Link>
+                <Link href="/notifications" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3 py-3 px-3 text-foreground rounded-lg hover:bg-muted">
+                  <Bell className="w-5 h-5 text-muted-foreground" /> Notifications
+                  <span className="ml-auto w-5 h-5 bg-destructive text-[10px] font-bold text-destructive-foreground rounded-full flex items-center justify-center">3</span>
+                </Link>
+              </>
+            )}
           </nav>
           
           <div className="border-t border-border pt-4">
@@ -397,15 +415,54 @@ export const Navbar = () => {
           
           <form onSubmit={handleReportSubmit} className="space-y-4 mt-4">
             <div className="space-y-2">
+              <label className="text-sm font-medium">City</label>
+              <select 
+                value={reportCity} 
+                onChange={e => {
+                  setReportCity(e.target.value);
+                  setReportMarket('');
+                  setReportShopId('');
+                }}
+                className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
+                required
+              >
+                <option value="" disabled>Select a city...</option>
+                {cities.map(city => (
+                  <option key={city} value={city}>{city}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Market</label>
+              <select 
+                value={reportMarket} 
+                onChange={e => {
+                  setReportMarket(e.target.value);
+                  setReportShopId('');
+                }}
+                className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
+                required
+                disabled={!reportCity}
+              >
+                <option value="" disabled>{reportCity ? 'Select a market...' : 'Select a city first...'}</option>
+                {reportAvailableMarkets.map(m => (
+                  <option key={m} value={m}>{m}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
               <label className="text-sm font-medium">Select Shop</label>
               <select 
                 value={reportShopId} 
                 onChange={e => setReportShopId(e.target.value)}
                 className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
                 required
+                disabled={!reportMarket}
               >
-                <option value="" disabled>Select a shop...</option>
-                {shops.map(s => (
+                <option value="" disabled>{reportMarket ? 'Select a shop...' : 'Select a market first...'}</option>
+                {filteredShops.map(s => (
                   <option key={s.id} value={s.id}>{s.name}</option>
                 ))}
               </select>
