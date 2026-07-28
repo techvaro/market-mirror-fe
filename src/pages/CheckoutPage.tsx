@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useLocation, Link } from 'wouter';
 import { useCart } from '@/context/CartContext';
 import { useOrders } from '@/context/OrderContext';
+import { useAuth } from '@/context/AuthContext';
 import { formatNaira } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { ShieldCheck, Truck, Store, CreditCard, Search } from 'lucide-react';
+import { ShieldCheck, Truck, Store, CreditCard, Search, LogIn, UserPlus } from 'lucide-react';
 import { shops } from '@/data/mockData';
 
 const NIGERIAN_STATES = [
@@ -58,6 +59,7 @@ const LGA_BY_STATE: Record<string, string[]> = {
 export default function CheckoutPage() {
   const { items, subtotal } = useCart();
   const { addOrder } = useOrders();
+  const { user } = useAuth();
   const [, setLocation] = useLocation();
   
   const deliveryFee = 1500;
@@ -79,6 +81,28 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     setLocation('/cart');
     return null;
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-4 bg-background">
+        <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+          <ShieldCheck className="w-10 h-10 text-primary" />
+        </div>
+        <h2 className="text-2xl font-display font-bold mb-2">Sign in to checkout</h2>
+        <p className="text-muted-foreground text-center max-w-md mb-6">
+          Please sign in or create an account to complete your purchase. Your cart items will be waiting for you.
+        </p>
+        <div className="flex gap-3">
+          <Link href="/sign-in">
+            <Button className="gap-2 font-bold"><LogIn className="w-4 h-4" /> Sign In</Button>
+          </Link>
+          <Link href="/sign-up">
+            <Button variant="outline" className="gap-2 font-bold"><UserPlus className="w-4 h-4" /> Create Account</Button>
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const handlePlaceOrder = (e: React.FormEvent) => {

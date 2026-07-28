@@ -185,32 +185,31 @@ export default function HomePage() {
               Discover verified markets and trusted vendors from cities around the world — all in one place.
             </motion.p>
 
-            {/* Search Bar */}
+            {/* Action Buttons */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="max-w-3xl mx-auto mt-10 px-1 sm:px-0"
+              className="flex flex-wrap justify-center gap-4 mt-10"
             >
-              <form 
-                onSubmit={handleSearch} 
-                className="bg-white/95 backdrop-blur-xl rounded-3xl md:rounded-full p-2.5 md:p-2 flex flex-col md:flex-row items-stretch md:items-center shadow-2xl shadow-black/50 ring-1 ring-black/5 gap-2 md:gap-0 relative"
-              >
-                <div className="flex-1 flex items-center gap-3 px-4 md:pl-6 w-full h-12 rounded-2xl md:rounded-none bg-muted/70 md:bg-transparent">
-                  <Search className="w-5 h-5 text-muted-foreground shrink-0" />
-                  <input 
-                    type="text" 
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                    placeholder="Search for markets..." 
-                    className="w-full bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground h-full text-base font-medium min-w-0"
-                  />
-                </div>
-                <Button type="submit" size="lg" className="w-full md:w-auto rounded-2xl md:rounded-full px-8 h-12 md:h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 shrink-0 gap-2">
-                  <Search className="w-4 h-4 md:hidden" />
-                  Search Markets
+              <Link href="/products">
+                <Button size="lg" className="rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+                  <ShoppingBag className="w-5 h-5" />
+                  E-Commerce
                 </Button>
-              </form>
+              </Link>
+              <Link href="/map">
+                <Button size="lg" className="rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+                  <MapIcon className="w-5 h-5" />
+                  Market Maps
+                </Button>
+              </Link>
+              <Link href="/search">
+                <Button size="lg" className="rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+                  <Search className="w-5 h-5" />
+                  Search
+                </Button>
+              </Link>
             </motion.div>
 
             {/* Live Stat Badge */}
@@ -310,9 +309,9 @@ export default function HomePage() {
       </section>
 
       {/* Newsletter / Info Split */}
-      <section className="py-12 md:py-20 bg-muted/50 border-y border-border">
-        <div className="container mx-auto px-3">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
+      <section className="py-12 md:py-20 bg-muted/50 border-y border-border overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
             
             {/* Newsletter */}
             <div className="bg-card border border-border p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-[2rem] shadow-sm flex flex-col justify-center">
@@ -333,16 +332,16 @@ export default function HomePage() {
                 </div>
               ) : (
                 <form 
-                  className="flex flex-col sm:flex-row gap-3"
+                  className="flex flex-col sm:flex-row gap-3 min-w-0"
                   onSubmit={(e) => { e.preventDefault(); setIsSubscribed(true); }}
                 >
                   <input 
                     type="email" 
                     required
                     placeholder="Enter your email address" 
-                    className="flex-1 h-12 md:h-14 px-4 md:px-5 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-lg shadow-sm"
+                    className="flex-1 min-w-0 h-12 md:h-14 px-4 md:px-5 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-lg shadow-sm"
                   />
-                  <Button type="submit" className="h-12 md:h-14 px-6 md:px-8 rounded-xl bg-foreground text-background hover:bg-foreground/90 font-bold text-base md:text-lg whitespace-nowrap shadow-md">
+                  <Button type="submit" className="h-12 md:h-14 px-6 md:px-8 rounded-xl bg-foreground text-background hover:bg-foreground/90 font-bold text-base md:text-lg whitespace-nowrap shadow-md shrink-0">
                     Subscribe
                   </Button>
                 </form>

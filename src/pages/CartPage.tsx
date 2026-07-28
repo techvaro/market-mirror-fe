@@ -1,16 +1,29 @@
 import { Link, useLocation } from 'wouter';
+import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { formatNaira } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { ShoppingCart, Trash2, Minus, Plus, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ShoppingCart, Trash2, Minus, Plus, ArrowRight, ShieldCheck, LogIn, UserPlus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 export default function CartPage() {
   const { items, updateQuantity, removeFromCart, subtotal } = useCart();
+  const { user } = useAuth();
   const [, setLocation] = useLocation();
+  const [loginDialogOpen, setLoginDialogOpen] = useState(false);
 
   const deliveryFee = 1500;
   const total = subtotal + (items.length > 0 ? deliveryFee : 0);
+
+  const handleCheckout = () => {
+    if (!user) {
+      setLoginDialogOpen(true);
+      return;
+    }
+    setLocation('/checkout');
+  };
 
   if (items.length === 0) {
     return (
@@ -135,7 +148,7 @@ export default function CartPage() {
               <Button 
                 size="lg" 
                 className="w-full h-14 text-base font-bold"
-                onClick={() => setLocation('/checkout')}
+                onClick={handleCheckout}
               >
                 Proceed to Checkout <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -149,6 +162,30 @@ export default function CartPage() {
           
         </div>
       </div>
+
+      {/* Login Required Dialog */}
+      <Dialog open={loginDialogOpen} onOpenChange={setLoginDialogOpen}>
+        <DialogContent className="sm:max-w-[400px]">
+          <DialogHeader>
+            <DialogTitle className="text-center text-xl">Sign in to Checkout</DialogTitle>
+            <DialogDescription className="text-center">
+              You need an account to complete your purchase. Sign in or create a free account to continue.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 mt-4">
+            <Link href="/sign-in">
+              <Button className="w-full h-11 gap-2 font-bold">
+                <LogIn className="w-4 h-4" /> Sign In
+              </Button>
+            </Link>
+            <Link href="/sign-up">
+              <Button variant="outline" className="w-full h-11 gap-2 font-bold">
+                <UserPlus className="w-4 h-4" /> Create Account
+              </Button>
+            </Link>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link, useSearch } from 'wouter';
+import { Link, useSearch, useLocation } from 'wouter';
 import { Search, Map as MapIcon, Store, Wrench, Building2, LayoutGrid, Star, ArrowRight, MapPin, Clock, Phone } from 'lucide-react';
 import { products, shops, buildings, services, Product, Shop, Building, Service } from '@/data/mockData';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { ProductCard } from '@/components/ProductCard';
 import { ShopCard } from '@/components/ShopCard';
 import { formatNaira } from '@/lib/utils';
@@ -10,11 +11,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function SearchResultsPage() {
   const searchString = useSearch();
+  const [, setLocation] = useLocation();
   const searchParams = new URLSearchParams(searchString);
   const q = searchParams.get('q') || '';
   const query = q.trim().toLowerCase();
 
+  const [searchInput, setSearchInput] = useState(q);
   const [activeTab, setActiveTab] = useState<'All' | 'Products' | 'Shops' | 'Markets' | 'Services'>('All');
+
+  useEffect(() => {
+    setSearchInput(q);
+  }, [q]);
 
   const searchResults = useMemo(() => {
     if (!query) {
@@ -57,9 +64,27 @@ export default function SearchResultsPage() {
     return (
       <div className="min-h-screen bg-background flex flex-col">
         <div className="bg-card border-b border-border py-12">
-          <div className="container mx-auto px-3 max-w-2xl">
-            <h1 className="text-4xl font-display font-bold text-foreground mb-4">Search Markets</h1>
-            <p className="text-muted-foreground text-lg">Enter a search term to find markets, shops, products, and services around the world.</p>
+          <div className="container mx-auto px-4 sm:px-6 max-w-2xl">
+            <h1 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-4">Search Markets</h1>
+            <p className="text-muted-foreground text-base sm:text-lg mb-6">Enter a search term to find markets, shops, products, and services around the world.</p>
+            <form 
+              onSubmit={(e) => { e.preventDefault(); if (searchInput.trim()) setLocation(`/search?q=${encodeURIComponent(searchInput.trim())}`); }}
+              className="flex gap-2"
+            >
+              <div className="flex-1 flex items-center gap-3 bg-background border border-input rounded-xl px-4 h-12 shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all">
+                <Search className="w-5 h-5 text-muted-foreground shrink-0" />
+                <input 
+                  type="text" 
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder="Search markets, shops, products..." 
+                  className="w-full bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground h-full text-sm sm:text-base font-medium min-w-0"
+                />
+              </div>
+              <Button type="submit" size="lg" className="h-12 px-6 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold shrink-0">
+                Search
+              </Button>
+            </form>
           </div>
         </div>
         <div className="container mx-auto px-3 py-16 flex-grow flex items-center justify-center">
@@ -97,15 +122,33 @@ export default function SearchResultsPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header Band */}
-      <div className="bg-card border-b border-border py-12">
-        <div className="container mx-auto px-3">
+      <div className="bg-card border-b border-border py-8 sm:py-12">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-2xl">
-            <h1 className="text-4xl font-display font-bold text-foreground mb-4">
+            <h1 className="text-2xl sm:text-4xl font-display font-bold text-foreground mb-3 sm:mb-4">
               Search results for "{q}"
             </h1>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-sm sm:text-lg mb-5 sm:mb-6">
               Found {searchResults.total} result{searchResults.total !== 1 ? 's' : ''} across markets, shops, products, and services.
             </p>
+            <form 
+              onSubmit={(e) => { e.preventDefault(); if (searchInput.trim()) setLocation(`/search?q=${encodeURIComponent(searchInput.trim())}`); }}
+              className="flex gap-2"
+            >
+              <div className="flex-1 flex items-center gap-3 bg-background border border-input rounded-xl px-4 h-11 sm:h-12 shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all">
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground shrink-0" />
+                <input 
+                  type="text" 
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder="Search for products, services, shops..." 
+                  className="w-full bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground h-full text-sm sm:text-base font-medium min-w-0"
+                />
+              </div>
+              <Button type="submit" size="sm" className="h-11 sm:h-12 px-4 sm:px-6 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm sm:text-base shrink-0">
+                Search
+              </Button>
+            </form>
           </div>
         </div>
       </div>

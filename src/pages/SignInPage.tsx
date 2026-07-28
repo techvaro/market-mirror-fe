@@ -91,7 +91,7 @@ export default function SignInPage() {
           {/* Mobile logo */}
           <div className="flex justify-center lg:hidden">
             <Link href="/">
-              <Logo size="md" />
+              <Logo variant="icon" size="md" />
             </Link>
           </div>
 

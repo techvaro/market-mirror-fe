@@ -179,7 +179,7 @@ export const Navbar = () => {
                   type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for markets..."
+                  placeholder="Search..."
                   className="w-full min-w-0 bg-muted/50 border border-border rounded-full pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 />
               </form>
@@ -332,7 +332,7 @@ export const Navbar = () => {
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for markets..."
+              placeholder="Search..."
               className="w-full bg-muted border border-border rounded-full pl-9 pr-4 py-2.5 text-sm focus:outline-none"
             />
           </form>
