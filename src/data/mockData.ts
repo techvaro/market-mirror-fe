@@ -219,6 +219,33 @@ export const cityMarkets: Record<string, string[]> = {
   'Ilorin': ['Ole Market', 'Iddele Market', 'Tanke Market'],
 };
 
+export const nigerianStates: string[] = [
+  'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue', 'Borno',
+  'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu', 'FCT (Abuja)', 'Gombe',
+  'Imo', 'Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Kogi', 'Kwara',
+  'Lagos', 'Nasarawa', 'Niger', 'Ogun', 'Ondo', 'Osun', 'Oyo', 'Plateau',
+  'Rivers', 'Sokoto', 'Taraba', 'Yobe', 'Zamfara'
+];
+
+export const stateMarkets: Record<string, string[]> = {
+  'Lagos': ['Alaba International Market', 'Computer Village', 'Trade Fair Complex', 'Aspamda Market', 'Brotherhood Market'],
+  'FCT (Abuja)': ['Wuse Market', 'Garki Market', 'Kurudu Market', 'Nyanya Market'],
+  'Kano': ['Kurmi Market', 'Sabon Gari Market', 'Singer Market', 'Dawanau Market'],
+  'Oyo': ['Bodija Market', 'Oje Market', 'Agbeni Market', 'Mokola Market', 'Sabongari Market', 'Oke-Ladipo Market'],
+  'Rivers': ['Mile 3 Market', 'D/Line Market', 'Artillery Market', 'Oil Mill Market'],
+  'Edo': ['Oba Market', 'Isonu Market', 'Oliha Market'],
+  'Kaduna': ['Kurmi Market', 'Sabon Tasha Market', 'Singa Market', 'Sabon Gari Market', 'Kwalker Market'],
+  'Enugu': ['Ogbete Market', 'Artisan Market', 'New Haven Market'],
+  'Abia': ['Aba Main Market', 'Ahia Ohuru', 'Cemetery Market'],
+  'Anambra': ['Onitsha Main Market', 'Bridges Head Market', 'Ose-Okwodu Market'],
+  'Delta': ['Effurun Market', 'Agbassa Market', 'Pessu Market'],
+  'Cross River': ['Marian Market', 'Eight Miles Market', 'Ekpo Abasi Market'],
+  'Plateau': ['Terminus Market', 'Ahmadu Bello Way Market'],
+  'Ogun': ['Kuto Market', 'Ita-Eko Market', 'Lafenwa Market'],
+  'Sokoto': ['Kantho Market', 'Dambuwa Market'],
+  'Kwara': ['Ole Market', 'Iddele Market', 'Tanke Market'],
+};
+
 export const products: Product[] = [
   // TechCity Electronics
   { id: 1, shopId: 1, name: 'LG 65-inch 4K Smart TV', description: 'Ultra HD smart television with webOS and Magic Remote.', category: 'Electronics', price: 450000, variants: ['65-inch', '75-inch'], stock: true, rating: 4.8, color: '#3b82f6' },

@@ -18,7 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { shops, cities, cityMarkets } from '@/data/mockData';
+import { shops, nigerianStates, stateMarkets } from '@/data/mockData';
 
 const mockChats = [
   { shopId: 1, shopName: 'TechCity Electronics', lastMessage: 'For this model, we can do ₦430,000...', time: '2m ago', unread: 2 },
@@ -35,31 +35,26 @@ export const Navbar = () => {
   const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const [selectedCity, setSelectedCity] = useState('Lagos');
-  const [selectedMarket, setSelectedMarket] = useState('Alaba International Market');
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedMarket, setSelectedMarket] = useState('');
 
   const [reportModalOpen, setReportModalOpen] = useState(false);
-  const [reportCity, setReportCity] = useState('');
+  const [reportState, setReportState] = useState('');
   const [reportMarket, setReportMarket] = useState('');
   const [reportShopId, setReportShopId] = useState('');
   const [reportReason, setReportReason] = useState('');
   const [reportDescription, setReportDescription] = useState('');
 
-  const reportAvailableMarkets = reportCity ? (cityMarkets[reportCity] || []) : [];
+  const reportAvailableMarkets = reportState ? (stateMarkets[reportState] || []) : [];
   const filteredShops = reportMarket 
-    ? shops.filter(s => s.market === reportMarket && s.city === reportCity)
-    : reportCity 
-      ? shops.filter(s => s.city === reportCity)
-      : shops;
+    ? shops.filter(s => s.market === reportMarket)
+    : shops;
 
-  const availableMarkets = cityMarkets[selectedCity] || [];
+  const availableMarkets = selectedState ? (stateMarkets[selectedState] || []) : [];
 
-  const handleCityChange = (city: string) => {
-    setSelectedCity(city);
-    const marketsForCity = cityMarkets[city];
-    if (marketsForCity && marketsForCity.length > 0) {
-      setSelectedMarket(marketsForCity[0]);
-    }
+  const handleStateChange = (state: string) => {
+    setSelectedState(state);
+    setSelectedMarket('');
   };
 
   const getInitials = (name: string) => {
@@ -94,10 +89,10 @@ export const Navbar = () => {
       description: reportDescription
     });
     
-    setReportModalOpen(false);
-    setReportCity('');
-    setReportMarket('');
-    setReportShopId('');
+        setReportModalOpen(false);
+        setReportState('');
+        setReportMarket('');
+        setReportShopId('');
     setReportReason('');
     setReportDescription('');
     
@@ -118,12 +113,13 @@ export const Navbar = () => {
             <MapPin className="w-3.5 h-3.5 text-primary" />
             <span className="hidden sm:inline text-muted-foreground">Location:</span>
             <select
-              value={selectedCity}
-              onChange={e => handleCityChange(e.target.value)}
+              value={selectedState}
+              onChange={e => handleStateChange(e.target.value)}
               className="bg-muted border-none text-foreground text-xs font-bold rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
-              {cities.map(city => (
-                <option key={city} value={city} className="bg-background text-foreground">{city}</option>
+              <option value="" disabled className="bg-background text-muted-foreground">Location</option>
+              {nigerianStates.map(state => (
+                <option key={state} value={state} className="bg-background text-foreground">{state}</option>
               ))}
             </select>
             <span className="text-muted-foreground/40">|</span>
@@ -132,6 +128,7 @@ export const Navbar = () => {
               onChange={e => setSelectedMarket(e.target.value)}
               className="bg-muted border-none text-foreground text-xs font-bold rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer max-w-[200px] truncate"
             >
+              <option value="" disabled className="bg-background text-muted-foreground">Select Market</option>
               {availableMarkets.map(m => (
                 <option key={m} value={m} className="bg-background text-foreground">{m}</option>
               ))}
@@ -417,18 +414,18 @@ export const Navbar = () => {
             <div className="space-y-2">
               <label className="text-sm font-medium">City</label>
               <select 
-                value={reportCity} 
+                value={reportState} 
                 onChange={e => {
-                  setReportCity(e.target.value);
+                  setReportState(e.target.value);
                   setReportMarket('');
                   setReportShopId('');
                 }}
                 className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
                 required
               >
-                <option value="" disabled>Select a city...</option>
-                {cities.map(city => (
-                  <option key={city} value={city}>{city}</option>
+                <option value="" disabled>Select a state...</option>
+                {nigerianStates.map(state => (
+                  <option key={state} value={state}>{state}</option>
                 ))}
               </select>
             </div>
@@ -443,9 +440,9 @@ export const Navbar = () => {
                 }}
                 className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
                 required
-                disabled={!reportCity}
+                disabled={!reportState}
               >
-                <option value="" disabled>{reportCity ? 'Select a market...' : 'Select a city first...'}</option>
+                <option value="" disabled>{reportState ? 'Select a market...' : 'Select a state first...'}</option>
                 {reportAvailableMarkets.map(m => (
                   <option key={m} value={m}>{m}</option>
                 ))}

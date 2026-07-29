@@ -1,4 +1,4 @@
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { Store, Facebook, Twitter, Instagram } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { useState } from 'react';
@@ -6,6 +6,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Button } from '@/components/ui/button';
 
 export const Footer = () => {
+  const [location] = useLocation();
+  const isAuthPage = location === '/sign-in' || location === '/sign-up';
   const [socialModalOpen, setSocialModalOpen] = useState(false);
 
   const handleSocialClick = (e: React.MouseEvent) => {
@@ -16,26 +18,28 @@ export const Footer = () => {
   return (
     <footer className="border-t border-border bg-card mt-auto">
       <div className="container mx-auto px-3 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
-            <Link href="/" className="mb-6 inline-block">
-              <Logo size="md" />
-            </Link>
-            <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-              The energy of Alaba Market, delivered with clarity. Discover authentic electronics, fabrics, and more from verified Lagos sellers.
-            </p>
-            <div className="flex gap-4">
-              <a href="#" onClick={handleSocialClick} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="#" onClick={handleSocialClick} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" onClick={handleSocialClick} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Instagram className="w-4 h-4" />
-              </a>
+        <div className={`grid grid-cols-1 ${isAuthPage ? 'md:grid-cols-3' : 'md:grid-cols-4'} gap-8`}>
+          {!isAuthPage && (
+            <div className="md:col-span-1">
+              <Link href="/" className="mb-6 inline-block">
+                <Logo size="md" />
+              </Link>
+              <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                The energy of Alaba Market, delivered with clarity. Discover authentic electronics, fabrics, and more from verified Lagos sellers.
+              </p>
+              <div className="flex gap-4">
+                <a href="#" onClick={handleSocialClick} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a href="#" onClick={handleSocialClick} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
+                  <Twitter className="w-4 h-4" />
+                </a>
+                <a href="#" onClick={handleSocialClick} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
+                  <Instagram className="w-4 h-4" />
+                </a>
+              </div>
             </div>
-          </div>
+          )}
           
           <div>
             <h4 className="font-display font-semibold mb-4">Explore Market</h4>
@@ -70,7 +74,7 @@ export const Footer = () => {
         </div>
         
         <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Market Mirror Lagos. All rights reserved.</p>
+          <p>© {new Date().getFullYear()}{isAuthPage ? '' : ' Market Mirror Lagos'}. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>

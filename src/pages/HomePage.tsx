@@ -130,12 +130,21 @@ const TrendingProductRow = ({ product }: { product: Product }) => {
 export default function HomePage() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [appModalOpen, setAppModalOpen] = useState(false);
+  const [searchDialogOpen, setSearchDialogOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [, setLocation] = useLocation();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
+      setLocation(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  const handleHeroSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      setSearchDialogOpen(false);
       setLocation(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
@@ -190,26 +199,26 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="flex flex-wrap justify-center gap-4 mt-10"
+              className="flex flex-col sm:flex-row justify-center gap-4 mt-10"
             >
-              <Link href="/products">
-                <Button size="lg" className="rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+              <Link href="/products" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
                   <ShoppingBag className="w-5 h-5" />
                   E-Commerce
                 </Button>
               </Link>
-              <Link href="/map">
-                <Button size="lg" className="rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+              <Link href="/map" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
                   <MapIcon className="w-5 h-5" />
                   Market Maps
                 </Button>
               </Link>
-              <Link href="/search">
-                <Button size="lg" className="rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+              <button onClick={() => setSearchDialogOpen(true)} className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
                   <Search className="w-5 h-5" />
                   Search
                 </Button>
-              </Link>
+              </button>
             </motion.div>
 
             {/* Live Stat Badge */}
@@ -615,6 +624,33 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Dialog open={searchDialogOpen} onOpenChange={setSearchDialogOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Search Market Mirror</DialogTitle>
+            <DialogDescription>
+              Find products, shops, markets, and services across Nigeria.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleHeroSearch} className="flex gap-2 mt-4">
+            <div className="flex-1 flex items-center gap-3 bg-background border border-input rounded-xl px-4 h-12 shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all">
+              <Search className="w-5 h-5 text-muted-foreground shrink-0" />
+              <input 
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products, shops, markets..."
+                className="w-full bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground h-full text-sm font-medium min-w-0"
+                autoFocus
+              />
+            </div>
+            <Button type="submit" className="h-12 px-6 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold shrink-0">
+              Search
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={appModalOpen} onOpenChange={setAppModalOpen}>
         <DialogContent>
