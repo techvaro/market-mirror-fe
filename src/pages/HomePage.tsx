@@ -173,7 +173,7 @@ export default function HomePage() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="inline-flex items-center gap-2"
             >
-              <span className="text-[#F97316] text-base md:text-xl font-display font-extrabold tracking-widest uppercase">
+              <span className="text-[#F97316] text-sm md:text-lg font-display font-semibold tracking-widest uppercase">
                 The mall of a Million Shops
               </span>
             </motion.div>
@@ -183,7 +183,11 @@ export default function HomePage() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="text-5xl md:text-7xl font-display font-extrabold text-white tracking-tight leading-[1.05]"
             >
-              Digital Twin of the <br className="hidden md:block"/> Global Marketplace.
+              <span className="block md:hidden">Digital Twin</span>
+              <span className="block md:hidden">of the Global</span>
+              <span className="block md:hidden">Marketplace.</span>
+              <span className="hidden md:block">Digital Twin of the</span>
+              <span className="hidden md:block">Global Marketplace.</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -201,16 +205,10 @@ export default function HomePage() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="flex flex-col sm:flex-row justify-center gap-4 mt-10"
             >
-              <Link href="/products" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
-                  <ShoppingBag className="w-5 h-5" />
-                  E-Commerce
-                </Button>
-              </Link>
               <Link href="/map" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
                   <MapIcon className="w-5 h-5" />
-                  Market Maps
+                  Market Map
                 </Button>
               </Link>
               <button onClick={() => setSearchDialogOpen(true)} className="w-full sm:w-auto">
@@ -219,6 +217,12 @@ export default function HomePage() {
                   Search
                 </Button>
               </button>
+              <Link href="/products" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+                  <ShoppingBag className="w-5 h-5" />
+                  E-Commerce
+                </Button>
+              </Link>
             </motion.div>
 
             {/* Live Stat Badge */}
