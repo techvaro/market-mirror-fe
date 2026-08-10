@@ -308,7 +308,7 @@ const MarketFloorMap = forwardRef<MarketFloorMapRef, MarketFloorMapProps>((_prop
         {!walkthroughMode && (
           <div className="absolute bottom-4 left-4 z-20 bg-white/90 backdrop-blur p-4 rounded-xl border border-gray-200 shadow-lg text-sm pointer-events-none">
             <div className="flex items-center gap-2 mb-2 font-bold text-gray-700">
-              <Info className="w-4 h-4" /> Alaba Map Guide
+              <Info className="w-4 h-4" /> Computer Village Map Guide
             </div>
             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
               {floorZones.map(z => (

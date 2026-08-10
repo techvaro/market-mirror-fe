@@ -16,7 +16,7 @@ export const HelpPage = () => (
     <p>Welcome to the Market Mirror Help Center. We're here to assist you with any questions or issues you may have.</p>
     <h3>Frequently Asked Questions</h3>
     <p><strong>How do I place an order?</strong><br/>Browse our shops, add items to your cart, and proceed to checkout.</p>
-    <p><strong>How are sellers verified?</strong><br/>We personally visit and verify every physical shop in Alaba market before listing them.</p>
+    <p><strong>How are sellers verified?</strong><br/>We personally visit and verify every physical shop in Computer Village before listing them.</p>
   </PageLayout>
 );
 
@@ -33,7 +33,7 @@ export const ReturnsPage = () => (
 
 export const AboutPage = () => (
   <PageLayout title="About Market Mirror">
-    <p>Market Mirror is the digital twin of the Alaba International Market, the largest electronics market in West Africa.</p>
+    <p>Market Mirror is the digital twin of Computer Village, the largest electronics market in West Africa.</p>
     <p>Our mission is to bring the authentic market experience online, providing verified vendors, real-time pricing, and reliable delivery.</p>
   </PageLayout>
 );

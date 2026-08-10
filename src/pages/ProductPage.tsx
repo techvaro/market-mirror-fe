@@ -45,10 +45,9 @@ export default function ProductPage() {
           {/* Image Gallery - Compact */}
           <div className="space-y-3">
             <div 
-              className="aspect-square w-full rounded-xl border border-border shadow-sm flex items-center justify-center"
-              style={{ backgroundColor: product.color }}
+              className="aspect-square w-full rounded-xl border border-border shadow-sm flex items-center justify-center bg-gray-200"
             >
-              <div className="text-white/30 font-display text-3xl md:text-4xl font-bold tracking-widest uppercase">
+              <div className="text-gray-400 font-display text-3xl md:text-4xl font-bold tracking-widest uppercase">
                 {product.category}
               </div>
             </div>
@@ -57,8 +56,8 @@ export default function ProductPage() {
               {[1, 2, 3, 4].map((i) => (
                 <div 
                   key={i}
-                  className={`aspect-square rounded-lg border-2 cursor-pointer transition-all ${i === 1 ? 'border-primary' : 'border-border opacity-70 hover:opacity-100'}`}
-                  style={{ backgroundColor: product.color, filter: `brightness(${1 - (i-1)*0.1})` }}
+                  className={`aspect-square rounded-lg border-2 cursor-pointer transition-all bg-gray-200 ${i === 1 ? 'border-gray-400' : 'border-border opacity-70 hover:opacity-100'}`}
+                  style={{ filter: `brightness(${1 - (i-1)*0.1})` }}
                 />
               ))}
             </div>
@@ -67,11 +66,11 @@ export default function ProductPage() {
           {/* Product Details - Compact */}
           <div className="space-y-3 md:space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">
+              <span className="text-xs font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded">
                 {product.category}
               </span>
               <div className="flex items-center gap-1 text-sm font-medium">
-                <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                <Star className="w-3.5 h-3.5 fill-muted-foreground text-muted-foreground" />
                 {product.rating}
               </div>
             </div>
@@ -99,7 +98,7 @@ export default function ProductPage() {
                       onClick={() => setSelectedVariant(variant)}
                       className={`px-3 py-1.5 rounded-lg border font-medium text-xs transition-all ${
                         selectedVariant === variant 
-                          ? 'border-primary bg-primary/5 text-primary shadow-sm' 
+                          ? 'border-gray-400 bg-muted text-foreground shadow-sm' 
                           : 'border-border bg-card text-foreground hover:border-gray-400'
                       }`}
                     >
@@ -131,7 +130,7 @@ export default function ProductPage() {
                   
                   <span className="text-xs font-medium">
                     {product.stock ? (
-                      <span className="text-secondary flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> In Stock</span>
+                      <span className="text-muted-foreground flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> In Stock</span>
                     ) : (
                       <span className="text-destructive">Out of Stock</span>
                     )}
@@ -179,28 +178,28 @@ export default function ProductPage() {
                 <div>
                   <h3 className="font-bold text-lg text-foreground">{shop.name}</h3>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" /> {shop.rating} Rating
+                    <Star className="w-3 h-3 fill-muted-foreground text-muted-foreground" /> {shop.rating} Rating
                     <span className="text-border">|</span>
-                    <ShieldCheck className="w-3 h-3 text-secondary" /> Verified Vendor
+                    <ShieldCheck className="w-3 h-3 text-muted-foreground" /> Verified Vendor
                   </div>
                 </div>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <MapPin className="w-4 h-4 text-primary shrink-0" />
+                  <MapPin className="w-4 h-4 text-muted-foreground shrink-0" />
                   <span>{shop.location}</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <Phone className="w-4 h-4 text-primary shrink-0" />
+                  <Phone className="w-4 h-4 text-muted-foreground shrink-0" />
                   <a href={`tel:${shop.phone.replace(/\s/g, '')}`} className="hover:text-primary transition-colors">{shop.phone}</a>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <Clock className="w-4 h-4 text-primary shrink-0" />
+                  <Clock className="w-4 h-4 text-muted-foreground shrink-0" />
                   <span>{shop.hours}</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <Store className="w-4 h-4 text-primary shrink-0" />
+                  <Store className="w-4 h-4 text-muted-foreground shrink-0" />
                   <span>{shop.shopNumber}</span>
                 </div>
               </div>

@@ -13,6 +13,7 @@ import { VendorProvider } from '@/context/VendorContext';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ScrollToTop } from '@/components/ScrollToTop';
+import { LiveChatWidget } from '@/components/LiveChatWidget';
 
 import HomePage from '@/pages/HomePage';
 import MapPage from '@/pages/MapPage';
@@ -84,6 +85,7 @@ function Router() {
         </Switch>
       </main>
       <Footer />
+      <LiveChatWidget />
     </div>
   );
 }

@@ -51,7 +51,7 @@ export const floorZones: FloorZone[] = [
         stall: 'Zone A Suite 22',
         phone: '+234 812 987 6543',
         category: 'Electronics',
-        description: 'Your one-stop destination for smartphones, tablets, and accessories at the best prices in Alaba. Authorised reseller for Samsung & Tecno.',
+        description: 'Your one-stop destination for smartphones, tablets, and accessories at the best prices in Computer Village. Authorised reseller for Samsung & Tecno.',
         image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80',
       },
     ],

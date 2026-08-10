@@ -67,7 +67,7 @@ export default function RiderTrackingPage() {
             <div className="bg-background border-2 border-foreground rounded-full p-2 shadow-lg">
               <MapPin className="w-5 h-5 text-foreground" />
             </div>
-            <span className="bg-background/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-bold mt-1 shadow-sm">Alaba Market</span>
+            <span className="bg-background/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-bold mt-1 shadow-sm">Computer Village</span>
           </div>
 
           {/* Destination Pin */}

@@ -101,7 +101,7 @@ export default function OrderTrackingPage() {
                         </div>
                         <div className="pt-2">
                           <h4 className={`font-bold ${isCurrent(1) ? 'text-primary' : ''}`}>Vendors Packing</h4>
-                          <p className="text-sm text-muted-foreground">Sellers are preparing your items at Alaba</p>
+                          <p className="text-sm text-muted-foreground">Sellers are preparing your items at Computer Village</p>
                         </div>
                       </div>
                       
@@ -198,7 +198,7 @@ export default function OrderTrackingPage() {
                   </div>
                 ) : (
                   <div className="text-sm text-muted-foreground">
-                    <p className="font-medium text-foreground">Alaba Market Pickup</p>
+                    <p className="font-medium text-foreground">Computer Village Pickup</p>
                     <p>Pick up directly from the vendors.</p>
                   </div>
                 )}

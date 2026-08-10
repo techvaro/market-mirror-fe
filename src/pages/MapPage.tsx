@@ -131,7 +131,7 @@ export default function MapPage() {
         <div className="md:hidden flex-grow relative">
           <iframe
             title="Market location map"
-            src={`https://www.google.com/maps?q=${encodeURIComponent('Alaba International Market, Nigeria')}&output=embed`}
+            src={`https://www.google.com/maps?q=${encodeURIComponent('Computer Village, Ikeja, Lagos, Nigeria')}&output=embed`}
             className="w-full h-full border-0"
             loading="lazy"
             allowFullScreen

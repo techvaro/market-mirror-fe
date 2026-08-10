@@ -99,8 +99,7 @@ const TrendingProductRow = ({ product }: { product: Product }) => {
         className="group flex items-center gap-4 p-4 rounded-2xl border border-border bg-card hover:shadow-xl hover:border-primary/30 transition-all cursor-pointer h-full"
       >
         <div 
-          className="w-24 h-24 rounded-xl flex-shrink-0 relative overflow-hidden shadow-inner"
-          style={{ backgroundColor: product.color }}
+          className="w-24 h-24 rounded-xl flex-shrink-0 relative overflow-hidden shadow-inner bg-muted"
         >
           {!product.stock && (
             <div className="absolute inset-0 bg-background/80 flex items-center justify-center backdrop-blur-[2px]">
@@ -203,22 +202,22 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="flex flex-col sm:flex-row justify-center gap-4 mt-10"
+              className="flex flex-col sm:flex-row justify-center items-stretch gap-4 mt-10 sm:max-w-xl mx-auto"
             >
-              <Link href="/map" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+              <Link href="/map" className="w-full sm:flex-1">
+                <Button size="lg" className="w-full rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
                   <MapIcon className="w-5 h-5" />
                   Market Map
                 </Button>
               </Link>
-              <button onClick={() => setSearchDialogOpen(true)} className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+              <button onClick={() => setSearchDialogOpen(true)} className="w-full sm:flex-1">
+                <Button size="lg" className="w-full rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
                   <Search className="w-5 h-5" />
                   Search
                 </Button>
               </button>
-              <Link href="/products" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
+              <Link href="/products" className="w-full sm:flex-1">
+                <Button size="lg" className="w-full rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/30 gap-2">
                   <ShoppingBag className="w-5 h-5" />
                   E-Commerce
                 </Button>
@@ -381,7 +380,7 @@ export default function HomePage() {
                     <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full flex items-center justify-center shrink-0">
                       <MapPin className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                     </div>
-                    <span className="text-sm md:text-lg font-medium pt-2 md:pt-2.5 leading-snug">Zone A Block 12, Alaba Int'l Market<br/>Ojo, Lagos, Nigeria</span>
+                    <span className="text-sm md:text-lg font-medium pt-2 md:pt-2.5 leading-snug">Zone A Block 12, Computer Village<br/>Ikeja, Lagos, Nigeria</span>
                   </li>
                   <li className="flex items-center gap-3 md:gap-5 text-secondary-foreground/80 hover:text-white transition-colors">
                     <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full flex items-center justify-center shrink-0">
@@ -417,7 +416,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold leading-[1.1] mb-4 md:mb-6 text-white tracking-tight">
-                  Alaba Market, <br/> now in your pocket.
+                  Computer Village, <br/> now in your pocket.
                 </h2>
                 <p className="text-base md:text-xl text-primary-foreground/90 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-6 md:mb-10 font-medium">
                   Get real-time price updates, chat directly with vendors, and track your local deliveries on the go with our mobile app.
@@ -609,7 +608,7 @@ export default function HomePage() {
                 <Truck className="w-6 h-6 text-primary" />
               </div>
               <h4 className="font-bold mb-2">Direct Delivery</h4>
-              <p className="text-sm text-muted-foreground">Fast, reliable logistics right from Alaba to your doorstep.</p>
+              <p className="text-sm text-muted-foreground">Fast, reliable logistics right from Computer Village to your doorstep.</p>
             </div>
             <div className="flex flex-col items-center p-4">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
@@ -644,7 +643,7 @@ export default function HomePage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products, shops, markets..."
+                placeholder="Search products, shops, or addresses..."
                 className="w-full bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground h-full text-sm font-medium min-w-0"
                 autoFocus
               />

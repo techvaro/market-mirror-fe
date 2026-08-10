@@ -66,10 +66,10 @@ export const shops: Shop[] = [
     reviewCount: 342,
     productCount: 156,
     description: 'Your premium destination for authentic electronics, home theater systems, and smart home devices. We import directly from manufacturers.',
-    location: 'Zone A Block 12, Alaba International Market',
+    location: 'Zone A Block 12, Computer Village',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #1e3a8a, #3b82f6)',
-    market: 'Alaba International Market',
+    market: 'Computer Village',
     city: 'Lagos',
     phone: '+234 803 123 4567',
     shopNumber: 'Zone A, Suite 12',
@@ -108,10 +108,10 @@ export const shops: Shop[] = [
     reviewCount: 128,
     productCount: 850,
     description: 'High-quality Ankara, lace, Senator materials, and pure cotton fabrics. Wholesale and retail available.',
-    location: 'Hall 3 Shop 22, Trade Fair Complex',
+    location: 'Hall 3 Shop 22, Computer Village',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #be123c, #f43f5e)',
-    market: 'Trade Fair Complex',
+    market: 'Computer Village',
     city: 'Lagos',
     phone: '+234 802 333 4444',
     shopNumber: 'Hall 3, Shop 22',
@@ -129,10 +129,10 @@ export const shops: Shop[] = [
     reviewCount: 245,
     productCount: 89,
     description: 'Durable and affordable home appliances: refrigerators, washing machines, microwaves, and blenders.',
-    location: 'Zone D Block 8, Alaba International Market',
+    location: 'Zone D Block 8, Computer Village',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #047857, #10b981)',
-    market: 'Alaba International Market',
+    market: 'Computer Village',
     city: 'Lagos',
     phone: '+234 807 444 9900',
     shopNumber: 'Zone D, Suite 7',
@@ -150,10 +150,10 @@ export const shops: Shop[] = [
     reviewCount: 412,
     productCount: 540,
     description: 'Genuine Toyota, Honda, and Mercedes spare parts. Engines, suspensions, and electrical components.',
-    location: 'Zone E Block 15, Alaba International Market',
+    location: 'Zone E Block 15, Computer Village',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #b45309, #f59e0b)',
-    market: 'Alaba International Market',
+    market: 'Computer Village',
     city: 'Lagos',
     phone: '+234 809 666 3344',
     shopNumber: 'Zone E, Suite 15',
@@ -171,10 +171,10 @@ export const shops: Shop[] = [
     reviewCount: 560,
     productCount: 230,
     description: 'Original cosmetics, skincare, and fragrances. Professional beauty supplies for salons and individuals.',
-    location: 'Hall 1 Shop 9, Trade Fair Complex',
+    location: 'Hall 1 Shop 9, Computer Village',
     hours: '8am - 6pm (Mon - Sat)',
     bannerGradient: 'linear-gradient(135deg, #be185d, #ec4899)',
-    market: 'Trade Fair Complex',
+    market: 'Computer Village',
     city: 'Lagos',
     phone: '+234 806 222 8811',
     shopNumber: 'Hall 1, Shop 9',
@@ -187,63 +187,27 @@ export const shops: Shop[] = [
 ];
 
 export const markets: string[] = [
-  'Alaba International Market',
-  'Computer Village',
-  'Trade Fair Complex'
+  'Computer Village'
+];
+
+export const comingSoonMarkets: string[] = [
+  'Alaba International Market'
 ];
 
 export const cities: string[] = [
-  'Lagos', 'Abuja', 'Kano', 'Ibadan', 'Port Harcourt', 'Benin City',
-  'Kaduna', 'Enugu', 'Aba', 'Onitsha', 'Warri', 'Calabar',
-  'Jos', 'Abeokuta', 'Ogbomoso', 'Sokoto', 'Zaria', 'Ilorin'
+  'Lagos'
 ];
 
 export const cityMarkets: Record<string, string[]> = {
-  'Lagos': ['Alaba International Market', 'Computer Village', 'Trade Fair Complex', 'Aspamda Market', 'Brotherhood Market'],
-  'Abuja': ['Wuse Market', 'Garki Market', 'Kurudu Market', 'Nyanya Market'],
-  'Kano': ['Kurmi Market', 'Sabon Gari Market', 'Singer Market', 'Dawanau Market'],
-  'Ibadan': ['Bodija Market', 'Oje Market', 'Agbeni Market', 'Mokola Market'],
-  'Port Harcourt': ['Mile 3 Market', 'D/Line Market', 'Artillery Market', 'Oil Mill Market'],
-  'Benin City': ['Oba Market', 'Isonu Market', 'Oliha Market'],
-  'Kaduna': ['Kurmi Market', 'Sabon Tasha Market', 'Singa Market'],
-  'Enugu': ['Ogbete Market', 'Artisan Market', 'New Haven Market'],
-  'Aba': ['Aba Main Market', 'Ahia Ohuru', 'Cemetery Market'],
-  'Onitsha': ['Onitsha Main Market', 'Bridges Head Market', 'Ose-Okwodu Market'],
-  'Warri': ['Effurun Market', 'Agbassa Market', 'Pessu Market'],
-  'Calabar': ['Marian Market', 'Eight Miles Market', 'Ekpo Abasi Market'],
-  'Jos': ['Terminus Market', 'Ahmadu Bello Way Market'],
-  'Abeokuta': ['Kuto Market', 'Ita-Eko Market', 'Lafenwa Market'],
-  'Ogbomoso': ['Sabongari Market', 'Oke-Ladipo Market'],
-  'Sokoto': ['Kantho Market', 'Dambuwa Market'],
-  'Zaria': ['Sabon Gari Market', 'Kwalker Market'],
-  'Ilorin': ['Ole Market', 'Iddele Market', 'Tanke Market'],
+  'Lagos': ['Computer Village'],
 };
 
 export const nigerianStates: string[] = [
-  'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue', 'Borno',
-  'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu', 'FCT (Abuja)', 'Gombe',
-  'Imo', 'Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Kogi', 'Kwara',
-  'Lagos', 'Nasarawa', 'Niger', 'Ogun', 'Ondo', 'Osun', 'Oyo', 'Plateau',
-  'Rivers', 'Sokoto', 'Taraba', 'Yobe', 'Zamfara'
+  'Lagos'
 ];
 
 export const stateMarkets: Record<string, string[]> = {
-  'Lagos': ['Alaba International Market', 'Computer Village', 'Trade Fair Complex', 'Aspamda Market', 'Brotherhood Market'],
-  'FCT (Abuja)': ['Wuse Market', 'Garki Market', 'Kurudu Market', 'Nyanya Market'],
-  'Kano': ['Kurmi Market', 'Sabon Gari Market', 'Singer Market', 'Dawanau Market'],
-  'Oyo': ['Bodija Market', 'Oje Market', 'Agbeni Market', 'Mokola Market', 'Sabongari Market', 'Oke-Ladipo Market'],
-  'Rivers': ['Mile 3 Market', 'D/Line Market', 'Artillery Market', 'Oil Mill Market'],
-  'Edo': ['Oba Market', 'Isonu Market', 'Oliha Market'],
-  'Kaduna': ['Kurmi Market', 'Sabon Tasha Market', 'Singa Market', 'Sabon Gari Market', 'Kwalker Market'],
-  'Enugu': ['Ogbete Market', 'Artisan Market', 'New Haven Market'],
-  'Abia': ['Aba Main Market', 'Ahia Ohuru', 'Cemetery Market'],
-  'Anambra': ['Onitsha Main Market', 'Bridges Head Market', 'Ose-Okwodu Market'],
-  'Delta': ['Effurun Market', 'Agbassa Market', 'Pessu Market'],
-  'Cross River': ['Marian Market', 'Eight Miles Market', 'Ekpo Abasi Market'],
-  'Plateau': ['Terminus Market', 'Ahmadu Bello Way Market'],
-  'Ogun': ['Kuto Market', 'Ita-Eko Market', 'Lafenwa Market'],
-  'Sokoto': ['Kantho Market', 'Dambuwa Market'],
-  'Kwara': ['Ole Market', 'Iddele Market', 'Tanke Market'],
+  'Lagos': ['Computer Village'],
 };
 
 export const products: Product[] = [
@@ -288,7 +252,7 @@ export const reviews: Review[] = [
   { id: 1, shopId: 1, reviewerName: 'Chinedu Okafor', rating: 5, text: 'Bought my TV here. Original product and they helped me test it before leaving. Very reliable guys.' },
   { id: 2, shopId: 1, reviewerName: 'Amina Bello', rating: 4, text: 'Good prices compared to the mall. The shop was a bit crowded but the service was fast.' },
   { id: 3, shopId: 1, reviewerName: 'Tunde Bakare', rating: 5, text: 'I only buy my electronics from TechCity. Always authentic with warranty.' },
-  { id: 4, shopId: 1, reviewerName: 'Ngozi Eze', rating: 4, text: 'Got a discount on the home theatre. Will definitely recommend them to anyone visiting Alaba.' },
+  { id: 4, shopId: 1, reviewerName: 'Ngozi Eze', rating: 4, text: 'Got a discount on the home theatre. Will definitely recommend them to anyone visiting Computer Village.' },
   { id: 5, shopId: 1, reviewerName: 'Emeka Uzo', rating: 5, text: 'Solid guys. The generator I bought works perfectly fine.' },
 
   { id: 6, shopId: 2, reviewerName: 'Sarah Johnson', rating: 5, text: 'Swapped my old iPhone here, got a great deal on the 15 Pro. The boys know their stuff.' },
@@ -313,7 +277,7 @@ export const reviews: Review[] = [
   { id: 22, shopId: 5, reviewerName: 'Okafor J.', rating: 4, text: 'Got a fairly used engine here, still running smooth.' },
   { id: 23, shopId: 5, reviewerName: 'Chidi B.', rating: 5, text: 'They know exactly what fits your car. Very knowledgeable.' },
   { id: 24, shopId: 5, reviewerName: 'Ayo T.', rating: 4, text: 'Good prices on tyres and batteries.' },
-  { id: 25, shopId: 5, reviewerName: 'Sunny', rating: 5, text: 'The best plug for Honda parts in Alaba.' },
+  { id: 25, shopId: 5, reviewerName: 'Sunny', rating: 5, text: 'The best plug for Honda parts in Computer Village.' },
 
   { id: 26, shopId: 6, reviewerName: 'Toke M.', rating: 5, text: 'All products are authentic. No fake makeup here.' },
   { id: 27, shopId: 6, reviewerName: 'Anita P.', rating: 5, text: 'The perfumes last long. Original designers.' },
@@ -325,24 +289,6 @@ export const reviews: Review[] = [
 export const buildings: Building[] = [
   {
     id: 1,
-    name: 'Alaba International Market',
-    description: 'The largest electronics and home appliance market in West Africa.',
-    location: 'Ojo, Lagos',
-    shopCount: 5000,
-    category: 'Market Complex',
-    bannerGradient: 'linear-gradient(135deg, #1e3a8a, #3b82f6)'
-  },
-  {
-    id: 2,
-    name: 'Trade Fair Complex',
-    description: 'Major hub for cosmetics, jewelry, fabrics, and fashion accessories.',
-    location: 'Badagry Expressway, Lagos',
-    shopCount: 3500,
-    category: 'Market Complex',
-    bannerGradient: 'linear-gradient(135deg, #4c1d95, #8b5cf6)'
-  },
-  {
-    id: 3,
     name: 'Computer Village',
     description: 'The prime ICT accessories and mobile phone hub of Nigeria.',
     location: 'Ikeja, Lagos',

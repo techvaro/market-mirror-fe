@@ -191,7 +191,7 @@ export default function SignInPage() {
           
           <div className="space-y-6">
             <h2 className="text-4xl font-display font-bold leading-tight text-white">
-              Alaba Market,<br />now in your pocket.
+              Computer Village,<br />now in your pocket.
             </h2>
             <p className="text-white/80 text-lg leading-relaxed">
               Experience the authentic hustle, unmatched variety, and unbeatable prices of Africa's largest electronics market—without leaving your home.

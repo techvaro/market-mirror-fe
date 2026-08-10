@@ -9,51 +9,11 @@ import { ShieldCheck, Truck, Store, CreditCard, Search, LogIn, UserPlus } from '
 import { shops } from '@/data/mockData';
 
 const NIGERIAN_STATES = [
-  'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue', 'Borno',
-  'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu', 'FCT', 'Gombe', 'Imo',
-  'Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Kogi', 'Kwara', 'Lagos', 'Nassarawa',
-  'Niger', 'Ogun', 'Ondo', 'Osun', 'Oyo', 'Plateau', 'Rivers', 'Sokoto', 'Taraba',
-  'Yobe', 'Zamfara'
+  'Lagos'
 ];
 
 const LGA_BY_STATE: Record<string, string[]> = {
   'Lagos': ['Ikeja', 'Surulere', 'Lekki / Ajah', 'Yaba', 'Festac', 'Alimosho', 'Ikorodu', 'Badagry', 'Epe', 'Oshodi-Isolo'],
-  'Abia': ['Aba North', 'Aba South', 'Umuahia North', 'Umuahia South', 'Isiala Ngwa North', 'Isiala Ngwa South'],
-  'Adamawa': ['Yola North', 'Yola South', 'Mubi North', 'Mubi South', 'Jimeta'],
-  'Akwa Ibom': ['Uyo', 'Eket', 'Ikot Ekpene', 'Abak', 'Essien Udim'],
-  'Anambra': ['Awka', 'Onitsha', 'Nnewi', 'Ekwulobia', 'Ihiala'],
-  'Bauchi': ['Bauchi', 'Azare', 'Misau', 'Katagum'],
-  'Bayelsa': ['Yenagoa', 'Brass', 'Nembe', 'Sagbama'],
-  'Benue': ['Makurdi', 'Gboko', 'Otukpo', 'Vandeikya'],
-  'Borno': ['Maiduguri', 'Biu', 'Damaturu', 'Bama'],
-  'Cross River': ['Calabar', 'Ikom', 'Ogoja', 'Obudu'],
-  'Delta': ['Warri', 'Sapele', 'Asaba', 'Ughelli', 'Agbor'],
-  'Ebonyi': ['Abakaliki', 'Afikpo', 'Onueke'],
-  'Edo': ['Benin City', 'Auchi', 'Igarra', 'Uromi'],
-  'Ekiti': ['Ado-Ekiti', 'Ikere-Ekiti', 'Iworoko', 'Oye'],
-  'Enugu': ['Enugu', 'Nsukka', 'Oji River', 'Awgu'],
-  'FCT': ['Abuja Municipal', 'Gwagwalada', 'Kuje', 'Bwari', 'Abaji'],
-  'Gombe': ['Gombe', 'Billiri', 'Kaltungo', 'Dukku'],
-  'Imo': ['Owerri', 'Orlu', 'Okigwe', 'Oguta'],
-  'Jigawa': ['Dutse', 'Hadejia', 'Kazaure', 'Ringim'],
-  'Kaduna': ['Kaduna', 'Zaria', 'Kafanchan', 'Soba'],
-  'Kano': ['Kano Municipal', 'Fagge', 'Gwale', 'Tarauni', 'Ungogo'],
-  'Katsina': ['Katsina', 'Daura', 'Funtua', 'Malumfashi'],
-  'Kebbi': ['Birnin Kebbi', 'Argungu', 'Yauri', 'Ngaski'],
-  'Kogi': ['Lokoja', 'Okene', 'Idah', 'Kabba'],
-  'Kwara': ['Ilorin', 'Offa', 'Omu-Aran', 'Lafiagi'],
-  'Nassarawa': ['Lafia', 'Nasarawa', 'Keffi', 'Akwanga'],
-  'Niger': ['Minna', 'Bida', 'Suleja', 'Kontagora'],
-  'Ogun': ['Abeokuta', 'Ijebu-Ode', 'Sango Ota', 'Ilaro', 'Shagamu'],
-  'Ondo': ['Akure', 'Ondo', 'Owo', 'Ikare', 'Ile-Oluji'],
-  'Osun': ['Osogbo', 'Ile-Ife', 'Oshogbo', 'Ilesa', 'Ede'],
-  'Oyo': ['Ibadan', 'Ogbomoso', 'Oyo', 'Iseyin', 'Saki'],
-  'Plateau': ['Jos', 'Bukuru', 'Shendam', 'Mangu'],
-  'Rivers': ['Port Harcourt', 'Obio-Akpor', 'Eleme', 'Okrika', 'Bonny'],
-  'Sokoto': ['Sokoto', 'Tambuwal', 'Gusau', 'Kware'],
-  'Taraba': ['Jalingo', 'Wukari', 'Bali', 'Gembu'],
-  'Yobe': ['Damaturu', 'Gujba', 'Potiskum', 'Nguru'],
-  'Zamfara': ['Gusau', 'Kaura Namoda', 'Tsafe', 'Anka'],
 };
 
 export default function CheckoutPage() {
@@ -205,7 +165,7 @@ export default function CheckoutPage() {
                       className="mt-1"
                     />
                     <div>
-                      <div className="font-bold flex items-center gap-2"><Store className="w-4 h-4"/> Alaba Pickup</div>
+                      <div className="font-bold flex items-center gap-2"><Store className="w-4 h-4"/> Computer Village Pickup</div>
                       <div className="text-sm text-muted-foreground mt-1">Pick up directly from the vendors.</div>
                     </div>
                   </label>

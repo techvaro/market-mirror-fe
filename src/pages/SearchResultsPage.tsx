@@ -33,7 +33,13 @@ export default function SearchResultsPage() {
     );
 
     const matchedShops = shops.filter(
-      s => s.name.toLowerCase().includes(query) || s.category.toLowerCase().includes(query) || s.description.toLowerCase().includes(query) || s.location.toLowerCase().includes(query)
+      s => s.name.toLowerCase().includes(query)
+        || s.category.toLowerCase().includes(query)
+        || s.description.toLowerCase().includes(query)
+        || s.location.toLowerCase().includes(query)
+        || s.market.toLowerCase().includes(query)
+        || s.shopNumber.toLowerCase().includes(query)
+        || s.city.toLowerCase().includes(query)
     );
 
     const matchedBuildings = buildings.filter(
@@ -77,7 +83,7 @@ export default function SearchResultsPage() {
                   type="text" 
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  placeholder="Search markets, shops, products..." 
+                  placeholder="Search products, shops, or addresses..." 
                   className="w-full bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground h-full text-sm sm:text-base font-medium min-w-0"
                 />
               </div>
@@ -97,8 +103,6 @@ export default function SearchResultsPage() {
               Search for markets by name, location, or category. Discover verified vendors worldwide.
             </p>
             <div className="flex flex-wrap gap-2 justify-center">
-              <Link href="/search?q=Alaba"><Button variant="outline" size="sm" className="rounded-full">Alaba Market</Button></Link>
-              <Link href="/search?q=Trade Fair"><Button variant="outline" size="sm" className="rounded-full">Trade Fair</Button></Link>
               <Link href="/search?q=Computer Village"><Button variant="outline" size="sm" className="rounded-full">Computer Village</Button></Link>
               <Link href="/search?q=electronics"><Button variant="outline" size="sm" className="rounded-full">Electronics</Button></Link>
               <Link href="/search?q=fabrics"><Button variant="outline" size="sm" className="rounded-full">Fabrics</Button></Link>

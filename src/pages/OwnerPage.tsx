@@ -127,7 +127,7 @@ export default function OwnerPage() {
             <div className="bg-card border border-border rounded-2xl p-6">
               <h3 className="font-display font-bold text-xl text-foreground mb-3">About this Shop</h3>
               <p className="text-muted-foreground leading-relaxed">
-                {desc || `${name} is a verified merchant at Alaba International Market, specialising in ${category}. All transactions are protected by Market Mirror's buyer guarantee.`}
+                {desc || `${name} is a verified merchant at Computer Village, specialising in ${category}. All transactions are protected by Market Mirror's buyer guarantee.`}
               </p>
             </div>
 

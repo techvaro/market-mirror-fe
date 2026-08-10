@@ -81,7 +81,7 @@ export default function ConfirmationPage() {
                   </div>
                   <div className="pt-2">
                     <h4 className="font-bold text-primary">Vendors Packing</h4>
-                    <p className="text-sm text-muted-foreground">Sellers are preparing your items at Alaba</p>
+                    <p className="text-sm text-muted-foreground">Sellers are preparing your items at Computer Village</p>
                   </div>
                 </div>
                 

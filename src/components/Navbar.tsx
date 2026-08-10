@@ -18,7 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { shops, nigerianStates, stateMarkets } from '@/data/mockData';
+import { shops, nigerianStates, stateMarkets, comingSoonMarkets } from '@/data/mockData';
 
 const mockChats = [
   { shopId: 1, shopName: 'TechCity Electronics', lastMessage: 'For this model, we can do ₦430,000...', time: '2m ago', unread: 2 },
@@ -132,12 +132,15 @@ export const Navbar = () => {
               {availableMarkets.map(m => (
                 <option key={m} value={m} className="bg-background text-foreground">{m}</option>
               ))}
+              {comingSoonMarkets.map(m => (
+                <option key={m} value="" disabled className="bg-background text-muted-foreground">{m} (Coming Soon)</option>
+              ))}
             </select>
           </div>
           <div className="hidden md:flex items-center gap-4 text-xs text-muted-foreground">
-            <span>Sell on Market Mirror</span>
+            <Link href="/vendors/open-shop" className="hover:text-primary transition-colors font-medium">Sell on Market Mirror</Link>
             <span className="text-border">|</span>
-            <span>Help Center</span>
+            <Link href="/help" className="hover:text-primary transition-colors font-medium">Help Center</Link>
           </div>
         </div>
       </div>
@@ -176,7 +179,7 @@ export const Navbar = () => {
                   type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search..."
+                  placeholder="Search products, shops, or addresses..."
                   className="w-full min-w-0 bg-muted/50 border border-border rounded-full pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 />
               </form>
@@ -329,7 +332,7 @@ export const Navbar = () => {
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search..."
+              placeholder="Search products, shops, or addresses..."
               className="w-full bg-muted border border-border rounded-full pl-9 pr-4 py-2.5 text-sm focus:outline-none"
             />
           </form>

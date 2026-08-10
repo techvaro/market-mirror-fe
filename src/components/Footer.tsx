@@ -25,7 +25,7 @@ export const Footer = () => {
                 <Logo size="md" />
               </Link>
               <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                The energy of Alaba Market, delivered with clarity. Discover authentic electronics, fabrics, and more from verified Lagos sellers.
+                The energy of Computer Village, delivered with clarity. Discover authentic electronics, fabrics, and more from verified Lagos sellers.
               </p>
               <div className="flex gap-4">
                 <a href="#" onClick={handleSocialClick} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">

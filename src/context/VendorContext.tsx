@@ -2,13 +2,17 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 export type ShopApplication = {
   id: string;
-  shopName: string;
   ownerName: string;
+  shopName: string;
+  building: string;
+  shopNumber: string;
+  shopAddress: string;
+  email: string;
   phone: string;
-  category: string;
-  market: string;
-  description: string;
-  status: 'Pending Review' | 'Approved' | 'Rejected';
+  idFile: string;
+  industry: string;
+  agreed: boolean;
+  status: 'Pending Approval' | 'Approved' | 'Rejected';
   createdAt: string;
 };
 
@@ -37,7 +41,7 @@ export const VendorProvider = ({ children }: { children: ReactNode }) => {
     setApplications(prev => [{
       ...application,
       id: `app-${Date.now()}`,
-      status: 'Pending Review',
+      status: 'Pending Approval',
       createdAt: new Date().toISOString()
     }, ...prev]);
   };

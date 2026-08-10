@@ -111,7 +111,7 @@ export default function ProductsPage() {
           <div className="max-w-2xl">
             <h1 className="text-4xl font-display font-bold text-foreground mb-4">Shop All Products</h1>
             <p className="text-muted-foreground text-lg">
-              Discover {products.length} products across all verified sellers in Alaba Market.
+              Discover {products.length} products across all verified sellers in Computer Village.
             </p>
           </div>
         </div>

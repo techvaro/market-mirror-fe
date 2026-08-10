@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { shops, markets } from '@/data/mockData';
+import { shops, buildings } from '@/data/mockData';
 import { ShopCard } from '@/components/ShopCard';
 import { Search, Filter, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,7 +9,7 @@ const PAGE_SIZE = 6; // Set to 6 so pagination is visible with mock data
 
 export default function ShopsPage() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
-  const [activeMarket, setActiveMarket] = useState<string>('All Markets');
+  const [activeBuilding, setActiveBuilding] = useState<string>('All Buildings');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('Recommended');
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -21,8 +21,8 @@ export default function ShopsPage() {
       ? shops 
       : shops.filter(s => s.category.includes(activeCategory.split(' ')[0])); // Simple matching
 
-    if (activeMarket !== 'All Markets') {
-      result = result.filter(s => s.market === activeMarket);
+    if (activeBuilding !== 'All Buildings') {
+      result = result.filter(s => s.market === activeBuilding);
     }
 
     if (searchQuery) {
@@ -39,13 +39,13 @@ export default function ShopsPage() {
     });
 
     return result;
-  }, [activeCategory, activeMarket, searchQuery, sortBy]);
+  }, [activeCategory, activeBuilding, searchQuery, sortBy]);
 
   const totalPages = Math.max(1, Math.ceil(filteredShops.length / PAGE_SIZE));
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [activeCategory, activeMarket, searchQuery, sortBy]);
+  }, [activeCategory, activeBuilding, searchQuery, sortBy]);
 
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
@@ -84,7 +84,7 @@ export default function ShopsPage() {
       <div className="bg-card border-b border-border py-12">
         <div className="container mx-auto px-3">
           <div className="max-w-2xl">
-            <h1 className="text-4xl font-display font-bold text-foreground mb-4">Browse Alaba Shops</h1>
+            <h1 className="text-4xl font-display font-bold text-foreground mb-4">Browse Computer Village Shops</h1>
             <p className="text-muted-foreground text-lg">
               Explore {shops.length} verified sellers offering the best prices on authentic goods directly from the market.
             </p>
@@ -98,16 +98,16 @@ export default function ShopsPage() {
         <div className="w-full md:w-64 flex-shrink-0 space-y-8">
           <div>
             <h3 className="font-bold mb-4 flex items-center gap-2">
-              <MapPin className="w-4 h-4" /> Market
+              <MapPin className="w-4 h-4" /> Building
             </h3>
             <select
-              value={activeMarket}
-              onChange={e => setActiveMarket(e.target.value)}
+              value={activeBuilding}
+              onChange={e => setActiveBuilding(e.target.value)}
               className="w-full bg-card border border-border text-sm rounded-lg px-3 py-2.5 font-medium focus:outline-none focus:border-primary"
             >
-              <option value="All Markets">All Markets</option>
-              {markets.map(m => (
-                <option key={m} value={m}>{m}</option>
+              <option value="All Buildings">All Buildings</option>
+              {buildings.map(b => (
+                <option key={b.id} value={b.name}>{b.name}</option>
               ))}
             </select>
           </div>
