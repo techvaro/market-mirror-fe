@@ -8,7 +8,6 @@ import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
 import { Logo } from '@/components/Logo';
 import { useAuth } from '@/context/AuthContext';
-import { hasAccount, verifyPassword, setPassword as storePassword } from '@/lib/mockAuthStore';
 
 const GoogleIcon = () => (
   <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -39,12 +38,6 @@ export default function SignInPage() {
     if (!formData.password) {
       newErrors.password = 'Password is required';
       isValid = false;
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-      isValid = false;
-    } else if (hasAccount(formData.email) && !verifyPassword(formData.email, formData.password)) {
-      newErrors.password = 'Incorrect password. Try again or reset it.';
-      isValid = false;
     }
 
     setErrors(newErrors);
@@ -59,10 +52,6 @@ export default function SignInPage() {
     e.preventDefault();
     if (validate()) {
       const derivedName = capitalizeFirstLetter(formData.email.split('@')[0]);
-
-      if (!hasAccount(formData.email)) {
-        storePassword(formData.email, formData.password);
-      }
 
       login({
         name: derivedName,

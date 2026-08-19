@@ -24,7 +24,7 @@ export default function OrderTrackingPage() {
     );
   }
 
-  const stages = ['confirmed', 'packing', 'out_for_delivery', 'delivered'];
+  const stages = ['confirmed', 'packing', 'ready_for_delivery', 'rider_on_the_way', 'delivered'];
   const isCancelled = order.status === 'cancelled';
   // If cancelled, current stage is whatever it reached before cancellation. For mockup, we can just say 'confirmed' if it's cancelled early.
   // In a real system, we'd have a timeline of state changes. Here, we'll assume it was confirmed then cancelled.
@@ -101,33 +101,46 @@ export default function OrderTrackingPage() {
                         </div>
                         <div className="pt-2">
                           <h4 className={`font-bold ${isCurrent(1) ? 'text-primary' : ''}`}>Vendors Packing</h4>
-                          <p className="text-sm text-muted-foreground">Sellers are preparing your items at Computer Village</p>
+                          <p className="text-sm text-muted-foreground">Sellers are preparing your items at the market</p>
                         </div>
                       </div>
                       
-                      {/* Out for Delivery / Ready for pickup */}
+                      {/* Ready for Delivery */}
                       <div className={`flex gap-4 ${!isCompleted(1) && !isCurrent(2) ? 'opacity-50' : ''}`}>
                         <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm border-4 border-card ${isCurrent(2) ? 'bg-background border-2 border-primary text-primary outline outline-4 outline-card' : isCompleted(2) ? 'bg-secondary text-white' : 'bg-muted text-muted-foreground'}`}>
-                          {order.deliveryMethod === 'delivery' ? <Truck className="w-5 h-5" /> : <Store className="w-5 h-5" />}
+                          {order.deliveryMethod === 'delivery' ? <Package className="w-5 h-5" /> : <Store className="w-5 h-5" />}
                         </div>
                         <div className="pt-2">
-                          <h4 className={`font-bold ${isCurrent(2) ? 'text-primary' : ''}`}>{order.deliveryMethod === 'delivery' ? 'Out for Delivery' : 'Ready for Pickup'}</h4>
-                          <p className="text-sm text-muted-foreground mb-2">{order.deliveryMethod === 'delivery' ? 'Rider picked up from market' : 'Items ready at designated shops'}</p>
-                          {order.deliveryMethod === 'delivery' && (isCurrent(2) || isCompleted(2)) && (
-                            <Link href={`/orders/${order.id}/tracking`}>
-                              <Button size="sm" variant="outline" className="mt-1">Track Rider Live</Button>
-                            </Link>
-                          )}
+                          <h4 className={`font-bold ${isCurrent(2) ? 'text-primary' : ''}`}>{order.deliveryMethod === 'delivery' ? 'Ready for Delivery' : 'Ready for Pickup'}</h4>
+                          <p className="text-sm text-muted-foreground">{order.deliveryMethod === 'delivery' ? 'Items packed and ready for rider pickup' : 'Items ready at designated shops'}</p>
                         </div>
                       </div>
 
+                      {/* Rider on the Way */}
+                      {order.deliveryMethod === 'delivery' && (
+                        <div className={`flex gap-4 ${!isCompleted(2) && !isCurrent(3) ? 'opacity-50' : ''}`}>
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm border-4 border-card ${isCurrent(3) ? 'bg-background border-2 border-primary text-primary outline outline-4 outline-card' : isCompleted(3) ? 'bg-secondary text-white' : 'bg-muted text-muted-foreground'}`}>
+                            <Truck className="w-5 h-5" />
+                          </div>
+                          <div className="pt-2">
+                            <h4 className={`font-bold ${isCurrent(3) ? 'text-primary' : ''}`}>Rider on the Way</h4>
+                            <p className="text-sm text-muted-foreground mb-2">Rider picked up from market</p>
+                            {(isCurrent(3) || isCompleted(3)) && (
+                              <Link href={`/orders/${order.id}/tracking`}>
+                                <Button size="sm" variant="outline" className="mt-1">Track Rider Live</Button>
+                              </Link>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Delivered */}
-                      <div className={`flex gap-4 ${!isCompleted(2) && !isCurrent(3) ? 'opacity-50' : ''}`}>
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm border-4 border-card ${isCurrent(3) ? 'bg-secondary text-white outline outline-4 outline-card' : 'bg-muted text-muted-foreground'}`}>
+                      <div className={`flex gap-4 ${!isCompleted(order.deliveryMethod === 'delivery' ? 3 : 2) && !isCurrent(order.deliveryMethod === 'delivery' ? 4 : 3) ? 'opacity-50' : ''}`}>
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm border-4 border-card ${isCurrent(order.deliveryMethod === 'delivery' ? 4 : 3) ? 'bg-secondary text-white outline outline-4 outline-card' : 'bg-muted text-muted-foreground'}`}>
                           <CheckCircle className="w-5 h-5" />
                         </div>
                         <div className="pt-2">
-                          <h4 className={`font-bold ${isCurrent(3) ? 'text-secondary' : ''}`}>{order.deliveryMethod === 'delivery' ? 'Delivered' : 'Picked Up'}</h4>
+                          <h4 className={`font-bold ${isCurrent(order.deliveryMethod === 'delivery' ? 4 : 3) ? 'text-secondary' : ''}`}>{order.deliveryMethod === 'delivery' ? 'Delivered' : 'Picked Up'}</h4>
                           <p className="text-sm text-muted-foreground">{order.deliveryMethod === 'delivery' ? 'Order delivered to your address' : 'Order picked up from market'}</p>
                         </div>
                       </div>
@@ -193,7 +206,7 @@ export default function OrderTrackingPage() {
                   <div className="text-sm space-y-1 text-muted-foreground">
                     <p className="font-medium text-foreground">{order.address.firstName} {order.address.lastName}</p>
                     <p>{order.address.street}</p>
-                    <p>{order.address.city}, Lagos</p>
+                    <p>{order.address.city}, {order.address.state || 'Lagos'}</p>
                     <p>{order.address.phone}</p>
                   </div>
                 ) : (

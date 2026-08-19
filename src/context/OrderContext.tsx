@@ -11,7 +11,7 @@ export type OrderItem = {
   shopName: string;
 };
 
-export type OrderStatus = 'confirmed' | 'packing' | 'out_for_delivery' | 'delivered' | 'cancelled';
+export type OrderStatus = 'confirmed' | 'packing' | 'ready_for_delivery' | 'rider_on_the_way' | 'delivered' | 'cancelled';
 
 export type Order = {
   id: string;
@@ -30,6 +30,7 @@ export type Order = {
     phone: string;
     street: string;
     city: string;
+    state?: string;
   };
   estimatedDelivery: string;
   cancellationReason?: string;
@@ -103,7 +104,7 @@ const generateSeedOrder = (
 };
 
 const initialSeedOrders: Order[] = [
-  generateSeedOrder('order-3', 0.4, 'out_for_delivery', [
+  generateSeedOrder('order-3', 0.4, 'ready_for_delivery', [
     { productId: 5, variant: '256GB', quantity: 1 },
     { productId: 8, variant: 'Black', quantity: 1 }
   ]),

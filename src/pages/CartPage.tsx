@@ -135,7 +135,7 @@ export default function CartPage() {
                   <span className="font-bold">{formatNaira(subtotal)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Delivery Fee (Lagos)</span>
+                  <span className="text-muted-foreground">Delivery Fee</span>
                   <span className="font-bold">{formatNaira(deliveryFee)}</span>
                 </div>
               </div>

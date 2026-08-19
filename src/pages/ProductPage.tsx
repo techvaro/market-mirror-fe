@@ -1,10 +1,10 @@
-import { useParams, Link } from 'wouter';
+import { useParams, Link, useLocation } from 'wouter';
 import { useState } from 'react';
 import { products, shops } from '@/data/mockData';
 import { useCart } from '@/context/CartContext';
 import { formatNaira } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Star, ShieldCheck, MapPin, Store, ChevronRight, Minus, Plus, ShoppingCart, Heart, Phone, MessageCircle, Video, Clock } from 'lucide-react';
+import { Star, ShieldCheck, MapPin, Store, ChevronRight, Minus, Plus, ShoppingCart, Heart, Phone, MessageCircle, Video, Clock, Zap } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
 
 export default function ProductPage() {
@@ -14,6 +14,7 @@ export default function ProductPage() {
   const shop = shops.find(s => s.id === product.shopId)!;
   
   const { addToCart } = useCart();
+  const [, setLocation] = useLocation();
   
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
@@ -23,6 +24,11 @@ export default function ProductPage() {
     setIsAdding(true);
     addToCart(product, selectedVariant, quantity);
     setTimeout(() => setIsAdding(false), 500);
+  };
+
+  const handleBuyNow = () => {
+    addToCart(product, selectedVariant, quantity);
+    setLocation('/checkout');
   };
   
   const relatedProducts = products.filter(p => p.shopId === product.shopId && p.id !== product.id).slice(0, 4);
@@ -143,6 +149,15 @@ export default function ProductPage() {
             <div className="flex gap-3">
               <Button 
                 size="lg" 
+                className="flex-grow h-12 text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+                onClick={handleBuyNow}
+                disabled={!product.stock}
+              >
+                <span className="flex items-center gap-2"><Zap className="w-4 h-4" /> Buy Now</span>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
                 className={`flex-grow h-12 text-sm font-bold transition-all ${isAdding ? 'bg-secondary hover:bg-secondary' : ''}`}
                 onClick={handleAddToCart}
                 disabled={!product.stock}
